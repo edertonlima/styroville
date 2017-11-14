@@ -1,0 +1,303 @@
+.nav {
+	width: auto;
+	right: 0;
+	bottom: 13px;
+	position: absolute;
+	z-index: 9999;
+
+	ul {
+
+		li {
+			position: relative;
+			display: inline-block;
+			margin: 0;
+			padding: 0;
+			height: 45px;
+			background: url('../images/bg_menu_hover.png') no-repeat center 45px;
+			@include animacao();
+
+			a {
+				margin-left: -4px;
+				display: block;
+				font-size: .875rem;
+				color: #ffffff;
+				font-weight: $bold;
+				padding: 0px 7px;
+				text-decoration: none;
+				text-shadow: 1px 1px 1px #000000;
+			}
+
+			&:hover {
+				opacity: .5;
+
+				> a {
+					
+				}
+
+				> ul {
+					display: block!important;
+					visibility: visible!important;
+				}
+			}
+
+			&:first-child {
+				a {
+					margin-left: 0;
+					border: none;
+				}
+			}
+
+
+			ul {
+				display: none;
+				width: 100%;
+				left: 0;
+				top: 81px;
+				z-index: 999;
+
+				li {
+					display: block;
+
+					a {
+						display: inline-block;
+						margin-left: 0px;
+						line-height: 60px;
+						color: $vermelho;
+						border-bottom: 1px solid $vermelho;
+					}
+
+					&:hover {
+						> a {
+							background-color: rgba($dourado, .5);
+						}
+
+						> ul {
+							display: block!important;
+							visibility: visible!important;
+						}
+					}
+				}
+
+				&.submenu {
+					position: absolute;
+					width: 320px;
+					left: 0;
+					top: 62px;
+					margin-left: -4px;
+
+					&:before {
+						content: '';
+						background-color: rgba(#FFF1E2, .9);
+						position: fixed;
+						top: 120px;
+						width: 100%;
+						height: 100vh;
+						left: 0;
+					}
+				}
+
+				&.submenu-sub {
+					display: none;
+					margin-left: 60px;
+
+					a {
+						padding: 0 15px;
+					}
+				}
+			}
+		}
+	}
+
+	@media all and (max-width: 1340px){
+		height: 100vh;
+		position: fixed;
+		display: table;
+		width: 100%;
+		margin: 0;
+		left: 0;
+		top: -110vh;
+		z-index: 9999;
+		background-color: $azul;
+
+		ul {
+			vertical-align: middle;
+			display: table-cell;
+
+			li {
+				float: right;
+				padding-right: 150px;
+				display: block;
+				@include clear;
+				text-align: right;
+
+				a {
+					color: #ffffff;
+					font-size: 2.5rem;
+					font-weight: $bold;
+					border: none;
+
+					&:hover {
+						color: #ffffff;
+						opacity: .3;
+					}
+				}
+			}
+		}
+	}
+
+	@media all and (max-width: 600px){
+		ul {
+			li {
+				padding-right: 25px;
+			}
+		}
+	}
+
+	@media all and (max-width: 500px){
+		ul {
+			li {
+				padding-right: 60px;
+				
+				a {
+					font-size: 1.5rem;
+					line-height: 45px;
+				}
+			}
+		}
+	}
+}
+
+/* menu mobile */
+.menu-mobile {
+	display: none;
+	float: right;
+	width: 40px;
+	height: 30px;
+	margin-top: 42px;
+	text-decoration: none;
+	position: relative;
+	z-index: 99999;
+
+	@media all and (max-width: 1340px) {
+		display: block;
+	}
+
+	@media all and (max-width: 1100px) {
+		margin-top: 55px;
+	}
+
+	span {
+		display: block;
+
+		em {
+			font-style: normal;
+			color: #6a6c74;
+			font-size: 3rem;
+			line-height: 2rem;
+			display: block;
+			text-decoration: none;
+			margin-top: -2px;
+			@include animacao();
+
+			&:hover {
+				color: $vermelho;
+			}
+		}
+	}
+
+	&.active {
+		text-align: center;
+		margin-top: 50px;
+		position: fixed;
+		right: 55px;
+
+		span {
+			em {
+				color: #ffffff;
+				text-decoration: none;
+			}
+		}
+
+		@media all and (max-width: 600px){
+			top: 25px;
+			right: 38px !important;
+		}
+	}
+
+	&:not(.active){
+		span {
+			position: relative;
+
+			em {
+				display: none;
+			}
+
+			&:before, &:after {
+				content: '';
+				position: absolute;
+			}
+
+			&:before {
+				top: 11px;
+			}
+
+			&:after {
+				top: 22px;
+			}
+		}
+
+		span, span:before, span:after {
+			background-color: #ffffff;
+			height: 5px;
+			width: 40px;
+			@include animacao();
+		}
+
+		&:hover {
+
+			span, span:before, span:after {
+				background-color: $azul;
+			}
+		}
+	}
+}
+
+@mixin menu-active {
+	background-position: center 30px;
+
+	&:hover {
+		opacity: 1;
+	}
+}
+
+body {
+	&.page-id-79 {
+		.nav ul li.menu-startups {
+			@include menu-active;
+		}
+	}
+
+	&.page-id-118 {
+		.nav ul li.menu-equipe {
+			@include menu-active;
+		}
+	}
+
+	&.page-id-139 {
+		.nav ul li.menu-vagas {
+			@include menu-active;
+		}
+	}
+
+	&.category, &.single:not(.single-ecosistema) {
+		.nav ul li.menu-news {
+			@include menu-active;
+		}
+	}
+
+	&.post-type-archive-produtos, &.single-produtos, &.tax-produtos_taxonomy {
+		.nav ul li.menu-produtos {
+			@include menu-active;
+		}
+	}
+}

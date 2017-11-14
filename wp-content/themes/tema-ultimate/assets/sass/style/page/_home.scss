@@ -1,0 +1,153 @@
+.box-comofunciona {
+	.ico-comofunciona {
+		margin-top: 55px;
+
+		img {
+			display: block;
+			margin: 0 auto 30px;
+		}
+
+		h4 {
+			//max-width: 300px;
+		}
+
+		p {
+			//max-width: 300px;
+			display: block;
+			margin-top: 20px;
+		}
+	}
+
+	.metodologia {
+		h2 {
+			margin-bottom: 45px;
+			font-size: 3.5rem;
+		}
+
+		h4 {
+			color: $cor-txt;
+		}
+
+		p {
+			font-size: ($font-size+.6);
+			line-height: ($font-size+.6)+.3;
+			margin-bottom: 35px;
+		}
+	}
+}
+
+.startups, .na-midia {
+	margin-top: 50px;
+
+	.item {
+		@include animacao;
+
+		img {
+			width: auto;
+			display: block;
+			margin: 0 auto;
+			max-width: 230px;
+		}
+
+		&.list-na-midia {
+			.cont-list {
+				h4 {
+					margin-bottom: 10px;
+				}
+			}
+		}
+	}
+
+	.item:not(.list-na-midia) {
+		&:hover {
+			opacity: .5;
+		}
+	}
+
+	.owl-dots {
+		margin-top: 50px;
+		text-align: center;
+
+		.owl-dot {
+			width: 28px;
+			height: 28px;
+			margin: 0 15px;
+			background-color: $cinza-escuro;
+			border-radius: 50%;
+			display: inline-block;
+			@include animacao;
+
+			&.active {
+				background-color: $azul-escuro;
+			}
+		}
+	}
+}
+
+.list-portfolio {
+	margin-bottom: 100px;
+	text-align: center;
+
+	.img-portfolio, .img-equipe, .border-img {
+		display: block;
+		margin: 0 auto;
+	}
+
+	.border-img {
+		border: 2px solid $azul-escuro;
+		border-radius: 50%;
+		overflow: hidden;
+		width: 180px;
+		height: 180px;
+		margin: 0 auto;
+		display: block;
+
+		img {
+			min-width: 180px;
+			min-height: 180px;
+		}
+	}
+
+	.img-equipe {
+
+	}
+
+	h5 {
+		margin-top: 20px;
+	}
+
+	p {
+		font-weight: $light;
+		font-size: 1.125rem;
+		line-height: 1.225rem;
+		margin-top: 10px;
+		height: 62px;
+		overflow: hidden;
+	}
+
+	.ico-link {
+		margin-top: 30px;
+		display: block;
+
+		a {
+			display: inline-block;
+			margin: 0 7px;
+			@include animacao;
+
+			&:hover {
+				opacity: .5;
+			}
+		}
+	}
+
+	&.list-vagas {
+		h5 {
+			margin: 0;
+		}
+
+		p {
+			height: auto;
+			text-align: left;
+		}
+	}
+}

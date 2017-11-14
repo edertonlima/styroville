@@ -1,0 +1,16 @@
+.header {
+	width: 100%;
+	height: 129px;
+	background: url('../images/bg_header.png') repeat-x 0 0;
+	position: relative;
+	@include clear;
+
+	.container {
+		height: 129px;
+	}
+
+	h1 {
+		float: left;
+	}
+
+}

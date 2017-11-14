@@ -1,0 +1,169 @@
+.post {
+	&.list-post {
+
+		.row {
+			margin-right: -30px;
+			margin-left: -30px;
+
+			[class*="col-"] {
+				padding-right: 30px;
+				padding-left: 30px;
+			}
+		}
+
+		.img-list {
+			width: 100%;
+		}
+
+		.cont-list {
+			padding-top: 30px;
+			padding-bottom: 30px;
+			margin-bottom: 80px;
+
+			h5, h4 {
+				color: $azul-escuro;
+				margin-bottom: 20px;
+				font-weight: $bold;
+			}
+
+			p {
+				font-size: 1.125rem;
+				line-height: 1.225rem;
+				font-weight: $light;
+			}
+
+			.info-post {
+				font-size: .875rem;
+				line-height: 1rem;
+				font-weight: $light;
+				display: block;
+				margin: 15px 0;
+			}
+
+			.post-completo {
+				font-size: 1.125rem;
+				line-height: 1.225rem;
+				font-weight: $bold;
+				text-decoration: none;
+				color: $azul-escuro;
+				@include animacao;
+
+				&:hover {
+					color: $cinza-escuro;
+				}
+			}
+		}
+
+		.first-post {
+			margin: 80px 0;
+
+			.cont-list {
+				margin-bottom: 0px;
+			}
+		}
+	}
+
+	&.det-post {
+
+		.img-det-single {
+			display: block;
+			margin: 0 auto;
+		}
+
+		.cont-list {
+			h5, h4 {
+				color: $azul-escuro;
+				margin-bottom: 20px;
+				font-weight: $bold;
+			}
+
+			h5 {
+				display: none;
+			}
+
+			p {
+				font-size: 1.125rem;
+				line-height: 1.225rem;
+				font-weight: $light;
+			}
+
+			.info-post {
+				font-size: .875rem;
+				line-height: 1rem;
+				font-weight: $light;
+				display: block;
+				margin: 15px 0;
+			}
+		}
+
+		.content-txt {
+			padding: 50px;
+
+			p {
+				text-align: left;
+
+				strong, em, span, b, i {
+					color: $cor-txt;
+				}
+			}
+		}
+	}
+
+	.ecosistema {
+		h5 {
+			color: $azul-escuro;
+			font-weight: $regular;
+
+			a {
+				color: $azul-escuro;
+				font-weight: $regular;
+
+				&:hover {
+					color: $cinza-escuro;
+				}
+			}
+		}
+	}
+}
+
+.single:not(.single-na-midia), .single:not(.single-releases) {
+	.info-post {
+		display: none;
+	}
+
+}
+
+.single-releases {
+	.post {
+		&.det-post {
+			.col-4 {
+				display: none;
+			}
+
+			.col-8 {
+				width: 100%;
+				padding: 0 65px;
+				margin-bottom: -15px;
+			}
+			.cont-list {
+				h5 {
+					display: block;
+				}
+			}
+		}
+	}
+
+}
+
+.single-ecosistema {
+	.post {
+		&.det-post {
+			.cont-list {
+				h5 {
+					display: block;
+				}
+			}
+		}
+	}
+
+}

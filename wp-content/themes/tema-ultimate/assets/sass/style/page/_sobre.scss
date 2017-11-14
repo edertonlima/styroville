@@ -1,0 +1,191 @@
+.box-page-sobre {
+
+	.img-sobre {
+		margin-top: 50px;
+	}
+
+	.col-text-sobre {
+		.col-4, .col-12 {
+			margin-top: 100px;
+
+			h4 {
+				text-align: left;
+				color: $vermelho;
+				font-weight: $light;
+				margin: 0 0 20px;
+			}
+
+			@media all and (max-width: 980px) {
+				width: 100%;
+				padding-right: 0;
+				padding-left: 0;
+			}
+		}
+
+		.col-12 {
+			&:first-child {
+				margin-top: 0;
+			}
+		}
+	}
+
+	.text-box-resp {
+		margin-top: 100px;
+		@include box-sizing;
+
+		.col-6 {
+			padding-top: 100px;
+			padding-bottom: 100px;
+			@include box-sizing;
+		}
+
+		h4, p {
+			color: #ffffff;
+			text-align: center;
+			overflow: hidden;
+			@include box-sizing;
+		}
+
+		h4 {
+			font-size: 1.875rem;
+			width: auto;
+			height: 35px;
+			font-weight: $bold;
+		}
+
+		p {
+			font-size: 1rem;
+			height: 110px;
+		}
+
+		.resp-social {
+			background-color: $vermelho;
+
+			h4, p {
+				color: #ffffff;
+				padding: 0 50px 0 30%;
+			}
+		}
+
+		.resp-ambiental {
+			background-color: $laranja;
+
+
+			h4, p {
+				color: #ffffff;
+				padding: 0 30% 0 50px;
+			}
+		}
+
+		@media all and (max-width: 1250px) {
+			.resp-ambiental, .resp-social {
+				h4, p {
+					padding: 0 30px;
+				}
+			}
+		}
+
+		@media all and (max-width: 1100px) {
+			.resp-ambiental, .resp-social {
+				h4, p {
+					padding: 0 20%;
+					height: auto;
+				}
+			}
+		}
+
+		@media all and (max-width: 750px) {
+			.resp-ambiental, .resp-social {
+				h4, p {
+					padding: 0 40px;
+				}
+			}
+		}
+	}
+
+	.text-detalhe {
+		text-align: justify;  
+		-moz-text-align-last: center;
+		text-align-last: center;
+	}
+}
+
+.box-post-sobre {
+	h4 {
+		margin-bottom: 20px;
+	}
+
+	.list-post {
+		a {
+			cursor: default;
+			.mask {
+				opacity: 0 !important;
+			}
+		}
+	}
+}
+
+.parceiros {
+	.owl-stage {
+		margin: 0 auto;
+	}
+
+	.owl-item {
+		background-color: #ffffff;
+	}
+
+	.item {
+		img {
+			@include animacao;
+		}
+
+		i {
+			position: absolute;
+			top: 50%;
+			color: $vermelho;
+			font-size: 1.875rem;
+			margin: -15px 0 0 -14px;
+			left: 50%;
+			opacity: 0;
+			z-index: 9999;
+			@include animacao;
+		}
+
+		&:hover {
+			img {
+				opacity: .7;
+			}
+
+			i {
+				opacity: 1;
+			}
+		}
+	}
+
+	.owl-nav {
+		display: block;
+		text-align: center;
+		margin-top: 20px;
+
+		.owl-prev, .owl-next {
+			display: inline-block;
+
+			i {
+				color: $vermelho;
+				margin: 0 10px;
+				@include animacao;
+			}
+
+			&:hover {
+				i {
+					opacity: .5;
+				}
+			}
+
+			&.disabled {
+				cursor: default;
+				opacity: .2;
+			}
+		}
+	}
+}

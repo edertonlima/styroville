@@ -1,0 +1,39 @@
+.produto {
+	&.list-produto {
+		.item-produto {
+			display: block;
+			border: 1px solid $cinza;
+			margin-top: 30px;
+			@include animacao;
+
+			.cont-list {
+				padding: 10px;
+			}
+
+			&:hover {
+				border-color: $azul;
+			}
+		}
+	}
+
+	.review {
+		display: block;
+		margin: 10px 0;
+
+		i {
+			display: inline-block;
+			color: $amarelo;
+
+			&.off {
+				color: $cinza;
+			}
+		}
+
+		span {
+			display: inline-block;
+			font-style: italic;
+			margin-left: 5px;
+			font-size: .625rem;
+		}
+	}
+}
