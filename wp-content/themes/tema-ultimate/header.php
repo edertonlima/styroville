@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -114,27 +116,30 @@
 			}
 		});
 
-		if(jQuery('body').height() <= jQuery(window).height()){
-			jQuery('.footer').css({position: 'absolute', bottom: '0px'});
-		}else{
-			jQuery('.footer').css({position: 'relative'});
-		}
-
 		scroll_body = jQuery(window).scrollTop();
 		if(scroll_body > 400){
 			jQuery('.header').addClass('scroll_menu');
 		}
 	});	
 
-	jQuery(window).resize(function(){
-		/*jQuery('.menu-mobile').removeClass('active');
-		jQuery('.header').removeClass('active');
-		jQuery('.nav').css('top','-110vh');
-		if(jQuery('body').height() <= jQuery(window).height()){
+	jQuery(window).load(function(){;
+		if(jQuery('body').height() < jQuery(window).height()){
 			jQuery('.footer').css({position: 'absolute', bottom: '0px'});
 		}else{
 			jQuery('.footer').css({position: 'relative'});
-		}*/
+		}
+	});
+	
+	jQuery(window).resize(function(){
+		/*jQuery('.menu-mobile').removeClass('active');
+		jQuery('.header').removeClass('active');
+		jQuery('.nav').css('top','-110vh'); */
+
+		if(jQuery('body').height() < jQuery(window).height()){
+			jQuery('.footer').css({position: 'absolute', bottom: '0px'});
+		}else{
+			jQuery('.footer').css({position: 'relative'});
+		}
 	});
 
 	jQuery(window).scroll(function(){
@@ -157,7 +162,7 @@
 
 			<h1>
 				<a href="<?php echo get_home_url(); ?>" title="<?php the_field('titulo', 'option'); ?>">
-					<img src="<?php the_field('logo_header', 'option'); ?>" alt="<?php the_field('titulo', 'option'); ?>">
+					<img src="<?php the_field('logo_header', 'option'); ?>" alt="<?php the_field('titulo', 'option'); ?>" style="display: none;">
 				</a>
 			</h1>
 

@@ -10,7 +10,7 @@
 				<div class="row">
 					<div class="col-3">
 						<a href="<?php echo get_home_url(); ?>" title="<?php the_field('titulo', 'option'); ?>" class="logo-footer">
-							<img src="<?php the_field('logo_header', 'option'); ?>" alt="<?php the_field('titulo', 'option'); ?>">
+							<img src="<?php the_field('logo_header', 'option'); ?>" alt="<?php the_field('titulo', 'option'); ?>" style="display: none;">
 						</a>
 					</div>
 					<div class="col-9">
@@ -42,6 +42,7 @@
 
 
 			// FORM
+			/*
 			jQuery(".enviar").click(function(){
 				jQuery('.enviar').html('ENVIANDO').prop( "disabled", true );
 				jQuery('.msg-form').removeClass('erro ok').html('');
@@ -69,9 +70,34 @@
 					jQuery('.enviar').html('ENVIAR').prop( "disabled", false );
 				}
 			});
+			*/
 		});
+
+		
+		function logOff(){
+
+			jQuery.ajax({
+				url: "<?php echo get_template_directory_uri(); ?>/session.php",
+				context: document.body
+			}).done(function() {
+				window.location.href = '<?php echo get_home_url(); ?>/minha-area'; 
+			});
+
+			/*jQuery.ajax("", { }, function(){
+				alert();
+				window.location.href = '<?php echo get_home_url(); ?>/minha-area'; 
+			});*/
+		};
 
 	</script>
 
 </body>
 </html>
+
+<?php
+	/*if(isset($_SESSION['id'])){
+		echo $_SESSION['id'];
+		echo '<br>'.$_SESSION['usuario'];
+		echo '<br>'.$_SESSION['senha'];
+	}*/
+?>

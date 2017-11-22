@@ -9,24 +9,42 @@
 		<div class="container">
 
 			<div class="row">
+				<div class="col-12">
+
+					<h2>
+						<a href="<?php echo get_home_url(); ?>/produtos" title="PRODUTOS">
+							PRODUTOS 
+						</a>
+						<span>
+							<i class="fa fa-angle-right" aria-hidden="true"></i>
+							<?php echo single_term_title(); ?>
+						</span>
+
+						<?php 
+							if((isset($_SESSION['id'])) and ($_SESSION['id'] != '')){ ?>
+								<a href="javascript: logOff();" class="logOff" title="Sair">
+									Sair <i class="fa fa-sign-out" aria-hidden="true"></i>
+								</a>
+							<?php }
+						?>
+					</h2>
+
+				</div>
+
 				<div class="col-9">
-
-					<h2>PRODUTOS <span><i class="fa fa-angle-right" aria-hidden="true"></i><?php echo single_term_title(); ?></span></h2>
-
 					<div class="row">
 						<?php
 							while ( have_posts() ) : the_post(); 
 								
-								get_template_part( 'content-produto-list', 'post' );
+								get_template_part( 'content-produtos-list', 'post' );
 
 							endwhile;
 							wp_reset_query();
 						?>
 					</div>
-
 				</div>
 
-				<div class="col-3">
+				<div class="col-3 sidebar">
 					<h2>CATEGORIAS</h2>
 					<ul class="list-menu">
 

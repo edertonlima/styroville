@@ -1,5 +1,17 @@
 <?php
+	$nome = $_GET['nome'];
 
+	$my_post = array(
+		'post_title'	=> $nome,
+		'post_type'		=> 'post',
+		'post_status'	=> 'publish'
+	);
+
+	wp_insert_post( $my_post );
+
+	echo(json_encode('ok'));
+
+/*
 	$nome = $_GET['nome'];
 	$email = $_GET['email'];
 	$telefone = $_GET['telefone'];
@@ -37,4 +49,5 @@
 	}else{
 		echo(json_encode("Desculpe, não foi possível enviar seu formulário. <br>Por favor, tente novamente mais tarde."));
 	}
+*/
 ?>

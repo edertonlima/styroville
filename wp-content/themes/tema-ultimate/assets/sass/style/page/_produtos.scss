@@ -16,6 +16,100 @@
 		}
 	}
 
+	&.det-produto {
+		.cont-det {
+			margin-top: 70px;
+
+			h4 {
+				font-size: 2rem;
+				line-height: 2.125rem;
+			}
+
+			p {
+				font-size: .875rem;
+				line-height: 1.225rem;
+				margin-top: 20px;
+			}
+
+			.nav-tab {
+				border-bottom: 2px solid $cinza;
+				height: 32px;
+
+				ul {
+					li {
+						padding-right: 30px; 
+
+						h2 {
+							&:after {
+								display: none;
+							}
+						}
+
+						&.active {
+							h2 {
+								&:after {
+									display: block;
+								}
+							}
+						}
+					}
+				}
+			}
+
+
+			.content-tab {
+				margin: 0px 0;
+
+				.tab {
+					p {
+						text-align: justify;
+					}
+
+					iframe {
+						margin: 30px auto 0;
+						width: 100%;
+					}
+				}
+			}
+		}
+	}
+
+	.avaliacoes {
+		margin: 30px 0;
+		width: 100%;
+		max-width: 600px;
+
+		li {
+			margin-bottom: 20px;
+			@include clear;
+
+			img {
+				margin-right: 20px;
+				float: left;
+				width: 155px;
+			}
+
+			.cont-avaliacao {
+				margin-top: 10px;
+				display: block;
+
+				h4 {
+					text-transform: uppercase;
+					font-size: 1rem;
+				}
+
+				p {
+					margin: 10px 0;
+				}
+
+				i {
+					color: #ccc;
+					font-size: 1.5rem;
+				}
+			}
+		}
+	}
+
 	.review {
 		display: block;
 		margin: 10px 0;
@@ -34,6 +128,75 @@
 			font-style: italic;
 			margin-left: 5px;
 			font-size: .625rem;
+		}
+	}
+
+	.galeria-equipamento {
+		display: block;
+		margin: 0 -2px;
+
+		li {
+			width: 20%;
+			padding: 4px 2px;
+			float: left;
+			@include animacao;
+			@include box-sizing;
+
+			a {
+				border: 1px solid $cinza;
+				display: block;
+				@include animacao;
+
+				img {
+					display: block;
+				}
+
+				&:hover {
+					border-color: $azul;
+				}
+			}
+
+			&.img-principal {
+				border: 1px solid $cinza;
+				position: relative;
+				text-align: center;
+				width: 100%;
+				margin-top: 50px;
+
+				a {
+					border: none;
+				}
+
+				i {
+					position: absolute;
+					color: #ffffff;
+					opacity: .3;
+					top: 50%;
+					left: 50%;
+					font-size: 5rem;
+					margin: -38px 0 0 -40px;
+					@include animacao;
+				}
+
+				&:hover {
+					border-color: $azul;
+
+					i {
+						opacity: 1;
+						color: $azul;
+					}
+				}
+			}
+		}
+	}
+
+	&.prod-relacionado {
+		.row {
+			.col-4 {
+				&:nth-child(3n+1) {
+					clear: none;
+				}
+			}
 		}
 	}
 }

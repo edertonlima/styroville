@@ -38,6 +38,14 @@ h2 {
 	position: relative;
 	text-transform: uppercase;
 
+	a {
+		color: $azul;
+
+		&:hover {
+			opacity: .5;
+		}
+	}
+
 	span {
 		color: $azul;
 		font-size: .75rem;
@@ -46,6 +54,28 @@ h2 {
 
 		i {
 			color: darken($cinza, 10%);
+			position: relative;
+			font-size: 1rem !important;
+			padding: 0 10px 0 8px;
+			top: 1px;
+		}
+
+		div {
+			display: inline-block;
+			color: $azul;
+		}
+	}
+
+	.logOff {
+		float: right;	
+
+		color: $azul;
+		font-size: .75rem;
+		position: relative;
+		top: -2px;
+
+		i {
+			color: $azul;
 			position: relative;
 			font-size: 1rem !important;
 			padding: 0 10px 0 8px;
@@ -61,6 +91,12 @@ h2 {
 		position: absolute;
 		bottom: -2px;
 		left: 0;
+	}
+
+	&.no-border-active {
+		&:after {
+			display: none;
+		}
 	}
 }
 
@@ -182,4 +218,12 @@ a {
 
 .azul-petroleo {
 	color: $azul-petroleo!important;
+}
+
+.table {
+	
+}
+
+.table-responsive {
+	
 }
