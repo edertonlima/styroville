@@ -33,10 +33,14 @@ body * {
 	}
 
 	.content-txt {
-		padding: 50px 100px 100px;
+		padding: 0px 0px 30px;
 		display: block;
 		@include clear();
 		@include box-sizing();
+
+		.img-page {
+			padding-left: 0;
+		}
 
 		ul {
 			width: 100%;
@@ -170,22 +174,25 @@ body * {
 
 		a {
 			font-weight: $bold;
-			color: $azul;
+			color: $cinza-escuro;
 
 			i {
 				display: none;
-				color: $azul;
+				color: $cinza-escuro;
 				margin-right: 5px;
 			}
 
 			&:hover {
-				opacity: .5;
+				color: $amarelo;
 			}
 		}
 
 		&.active {
 			a {
+				color: $amarelo;
+
 				i {
+					color: $amarelo;
 					display: inline-block;
 				}
 			}
@@ -197,5 +204,22 @@ body * {
 .sidebar {
 	h2 {
 		margin-top: 30px;
+	}
+
+	.sidebar-block {
+		margin-top: 20px;
+		overflow: hidden;
+
+		h2 {
+			margin-bottom: 20px;
+		}
+
+		&:first-child {
+			margin-top: 0;
+
+			h2 {
+				margin-top: 0;
+			}
+		}
 	}
 }

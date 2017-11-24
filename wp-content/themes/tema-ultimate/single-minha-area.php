@@ -269,7 +269,7 @@
 				</div>
 			</div>
 
-			<div class="col-3">
+			<div class="col-3 sidebar">
 				<ul class="list-menu">
 
 					<li class="" id="menu-novo-pedido">

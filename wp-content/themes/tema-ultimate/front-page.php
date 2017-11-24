@@ -1,4 +1,62 @@
 <?php get_header(); ?>
+
+
+<section class="box-content">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-8">
+				<h2 class="tit-area"><?php the_field('subtitulo',get_page_by_path('empresa')->ID); ?></h2>
+
+				<div class="row">
+
+					<?php $imagem = wp_get_attachment_image_src( get_post_thumbnail_id(get_page_by_path('empresa')->ID), 'medium' );
+						if($imagem[0]){ ?>
+							<img src="<?php echo $imagem[0]; ?>" class="img-page col-8">
+						<?php }
+					?>
+
+					<div class="col-4">
+						<img src="<?php the_field('logo_header', 'option'); ?>" alt="<?php the_field('titulo', 'option'); ?>">
+						<p></p>
+						<p><?php echo get_the_excerpt(get_page_by_path('empresa')->ID); ?></p>
+						<a href="<?php echo get_home_url(); ?>/empresa" title="Mais Notícias" class="mais-item">
+							<i class="fa fa-caret-right" aria-hidden="true"></i> Saiba mais
+						</a>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="col-4 sidebar">
+
+				<div class="sidebar-block noticias">
+					<h2>NOTÍCIAS</h2>
+
+					<ul class="list-noticias">
+						<?php query_posts(
+							array(
+								'post_type' => 'post',
+								'posts_per_page' => 3
+							)
+						);
+
+						while ( have_posts() ) : the_post(); 
+							get_template_part( 'content-noticias-list', 'post' );
+						endwhile;
+						wp_reset_query(); ?>
+					</ul>
+					<a href="<?php echo get_home_url(); ?>/noticias" title="Mais Notícias" class="mais-item">
+						<i class="fa fa-caret-right" aria-hidden="true"></i> Mais Notícias
+					</a>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+</section>
+
 <?php /*
 <section class="box-content box-comofunciona" id="goScrollOn">
 	<div class="container">

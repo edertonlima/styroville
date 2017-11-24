@@ -122,8 +122,8 @@
 		}
 	});	
 
-	jQuery(window).load(function(){;
-		if(jQuery('body').height() < jQuery(window).height()){
+	jQuery(window).load(function(){
+		if(((jQuery('body').height())+100) < jQuery(window).height()){
 			jQuery('.footer').css({position: 'absolute', bottom: '0px'});
 		}else{
 			jQuery('.footer').css({position: 'relative'});
@@ -135,7 +135,7 @@
 		jQuery('.header').removeClass('active');
 		jQuery('.nav').css('top','-110vh'); */
 
-		if(jQuery('body').height() < jQuery(window).height()){
+		if(((jQuery('body').height())+100) < jQuery(window).height()){
 			jQuery('.footer').css({position: 'absolute', bottom: '0px'});
 		}else{
 			jQuery('.footer').css({position: 'relative'});
@@ -169,7 +169,7 @@
 			<nav class="nav">
 				<ul class="menu-principal">
 					<li class="menu-empresa">
-						<a href="javascript:" title="EMPRESA">EMPRESA</a>
+						<a href="<?php echo get_home_url(); ?>/empresa" title="EMPRESA">EMPRESA</a>
 					</li>
 
 					<li class="menu-produtos">
@@ -189,7 +189,7 @@
 					</li>
 
 					<li class="menu-fale-conosco">
-						<a href="javascript:" class="" title="FALE CONOSCO">FALE CONOSCO</a>
+						<a href="<?php echo get_home_url(); ?>/fale-conosco" title="FALE CONOSCO">FALE CONOSCO</a>
 					</li>
 				</ul>
 			</nav>

@@ -17,7 +17,7 @@
 
 <div class="col-6">
 	<div class="cont-det">
-		<h4><?php the_title(); ?></h4>
+		<h3><?php the_title(); ?></h3>
 
 		<div class="review">
 			<?php 
@@ -115,7 +115,7 @@
 								<div class="cont-avaliacao">
 									<i class="fa fa-quote-left" aria-hidden="true"></i>
 									<p><?php the_sub_field('depoimento'); ?></p>
-									<h4><?php the_sub_field('nome'); ?></h4>
+									<h3><?php the_sub_field('nome'); ?></h3>
 								</div>
 							</li>
 

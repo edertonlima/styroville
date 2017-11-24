@@ -27,8 +27,10 @@ function my_custom_init() {
 
 
 	//PAGE
+	add_post_type_support( 'page', 'excerpt' );
+
 	//remove_post_type_support('page', 'editor');
-	remove_post_type_support( 'page', 'thumbnail' );
+	//remove_post_type_support( 'page', 'thumbnail' );
 	remove_post_type_support( 'page' , 'comments');
 }
 
@@ -78,7 +80,7 @@ function gera_url_encurtada($url){
 function change_post_label() {
     global $menu;
     global $submenu;
-    $menu[5][0] = 'Blog';
+    $menu[5][0] = 'Notícias';
     $submenu['edit.php'][5][0] = 'Todas';
     $submenu['edit.php'][10][0] = 'Adicionar';
     echo '';
@@ -86,19 +88,19 @@ function change_post_label() {
 function change_post_object() {
     global $wp_post_types;
     $labels = &$wp_post_types['post']->labels;
-    $labels->name = 'Blog';
-    $labels->singular_name = 'Blog';
+    $labels->name = 'Notícias';
+    $labels->singular_name = 'Notícias';
     $labels->add_new = 'Adicionar';
     $labels->add_new_item = 'Adicionar';
     $labels->edit_item = 'Editar';
-    $labels->new_item = 'Blog';
+    $labels->new_item = 'Notícias';
     $labels->view_item = 'Visualizar';
     $labels->search_items = 'Pesquisar';
     $labels->not_found = 'Nenhum item encontrato';
     $labels->not_found_in_trash = 'A lixeira está vazia';
     $labels->all_items = 'Todos';
-    $labels->menu_name = 'Blog';
-    $labels->name_admin_bar = 'Blog';
+    $labels->menu_name = 'Notícias';
+    $labels->name_admin_bar = 'Notícias';
 }
  
 add_action( 'admin_menu', 'change_post_label' );

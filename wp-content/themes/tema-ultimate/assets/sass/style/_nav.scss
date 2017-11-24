@@ -271,28 +271,9 @@
 }
 
 body {
-	&.page-id-79 {
-		.nav ul li.menu-startups {
-			@include menu-active;
-		}
-	}
 
-	&.page-id-118 {
-		.nav ul li.menu-equipe {
-			@include menu-active;
-		}
-	}
-
-	&.page-id-139 {
-		.nav ul li.menu-vagas {
-			@include menu-active;
-		}
-	}
-
-	&.category, &.single:not(.single-ecosistema) {
-		.nav ul li.menu-news {
-			@include menu-active;
-		}
+	.nav ul li.active {
+		@include menu-active;
 	}
 
 	&.post-type-archive-produtos, &.single-produtos, &.tax-produtos_taxonomy {
