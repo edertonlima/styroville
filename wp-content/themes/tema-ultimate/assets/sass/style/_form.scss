@@ -249,7 +249,7 @@ form {
 
 .select {
 	overflow: hidden;
-	background-color: #e6e7e8;
+	background-color: $cinza-escuro;
 	line-height: 44px;
 	height: 40px;
 	padding: 0 0 0 10px;
@@ -263,8 +263,8 @@ form {
 		padding-right: 135px;
 		background-color: transparent;
 		font-weight: $regular;
-		font-size: 1.125rem;
-		color: $roxo;
+		font-size: .875rem;
+		color: #ffffff;
 		box-sizing: content-box;
 		position: relative;
 		z-index: 99;
@@ -273,10 +273,11 @@ form {
 
 	&:after {
 		content: "\f107";
+		color: #ffffff;
 		position: absolute;
 		right: 13px;
-		top: 12px;
-		font: normal normal normal 46px/1 FontAwesome;
+		top: 13px;
+		font: normal normal normal 30px/1 FontAwesome;
 		cursor: pointer;
 		height: 15px;
 		line-height: 15px;

@@ -1,5 +1,6 @@
 .noticias {
 	.list-noticias {
+		margin-bottom: 15px;
 		li {
 			border-bottom: 1px solid $cinza;
 			padding: 10px 0;
@@ -34,6 +35,19 @@
 					font-size: 1.225rem;
 					margin-top: -1px;
 				}
+			}
+		}
+	}
+
+	.next-post {
+		float: right;
+		text-align: right;
+	}
+
+	.sidebar { 
+		.noticias {
+			.list-noticias {
+				margin-top: 15px; 
 			}
 		}
 	}

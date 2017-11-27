@@ -8,10 +8,34 @@
 
 			.cont-list {
 				padding: 10px;
+				overflow: hidden;
+				display: block;
+				@include box-sizing;
+			}
+
+			.mais-item {
+				float: right;
+				color: $azul;
+				font-size: $font-size;
+				margin: 10px 0 0;
+
+				i {
+					color: $azul;
+					font-size: $font-size;
+					padding-right: 5px;
+				}
 			}
 
 			&:hover {
 				border-color: $azul;
+
+				.mais-item {
+					color: $amarelo;
+
+					i {
+						color: $amarelo;
+					}
+				}
 			}
 		}
 	}

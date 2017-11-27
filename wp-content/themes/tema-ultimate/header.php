@@ -177,15 +177,15 @@
 					</li>
 
 					<li class="menu-qualidade">
-						<a href="javascript:" title="QUALIDADE">QUALIDADE</a>
+						<a href="<?php echo get_home_url(); ?>/qualidade" title="QUALIDADE">QUALIDADE</a>
 					</li>
 
 					<li class="menu-area-de-atuacao">
-						<a href="javascript:" title="ÁREA DE ATUAÇÃO">ÁREA DE ATUAÇÃO</a>
+						<a href="<?php echo get_home_url(); ?>/area-de-atuacao" title="ÁREA DE ATUAÇÃO">ÁREA DE ATUAÇÃO</a>
 					</li>
 
 					<li class="menu-noticias">
-						<a href="javascript:" title="NOTÍCIAS">NOTÍCIAS</a>
+						<a href="<?php echo get_home_url(); ?>/noticias" title="NOTÍCIAS">NOTÍCIAS</a>
 					</li>
 
 					<li class="menu-fale-conosco">

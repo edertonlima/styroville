@@ -1,5 +1,9 @@
 
-<h3><?php the_field('subtitulo'); ?></h3>
+<?php if(is_single()){ ?>
+	<h3><?php the_title(); ?></h3>
+<?php }else{ ?>
+	<h3><?php the_field('subtitulo'); ?></h3>
+<?php } ?>
 
 <div class="content-txt">
 	<?php $imagem = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'medium' );

@@ -6,22 +6,26 @@
 			<div class="row">
 				<div class="col-12">
 					<h2>
-						<a href="<?php echo get_home_url(); ?>/empresa" title="EMPRESA">
-							EMPRESA
-						</a>
-						<span>
-							<i class="fa fa-angle-right" aria-hidden="true"></i>
-							<?php echo the_title(); ?>
-						</span>
+						<?php if(($post->post_name == 'area-de-atuacao') or($post->post_name == 'qualidade')){ 
+							the_title();						
+						}else{ ?>
+							<a href="<?php echo get_home_url(); ?>/empresa" title="EMPRESA">
+								EMPRESA
+							</a>
+							<span>
+								<i class="fa fa-angle-right" aria-hidden="true"></i>
+								<?php echo the_title(); ?>
+							</span>
+						<?php } ?>
 					</h2>
 				</div>
 
-				<div class="col-9">
+				<div class="col-8">
 
 					<?php
 						while ( have_posts() ) : the_post(); 
 							
-							get_template_part( 'content-page', 'post' );
+							get_template_part( 'content', 'post' );
 
 						endwhile;
 						wp_reset_query();
@@ -48,30 +52,10 @@
 					
 				</div>
 
-				<div class="col-3 sidebar">
+				<div class="col-4 sidebar">
 
-					<?php include 'menu-empresa.php'; ?>
-
-					<div class="sidebar-block noticias">
-						<h2>NOTÍCIAS</h2>
-
-						<ul class="list-noticias">
-							<?php query_posts(
-								array(
-									'post_type' => 'post',
-									'posts_per_page' => 3
-								)
-							);
-
-							while ( have_posts() ) : the_post(); 
-								get_template_part( 'content-noticias-list', 'post' );
-							endwhile;
-							wp_reset_query(); ?>
-						</ul>
-						<a href="<?php echo get_home_url(); ?>/noticias" title="Mais Notícias" class="mais-item">
-							<i class="fa fa-caret-right" aria-hidden="true"></i> Mais Notícias
-						</a>
-					</div>
+					<?php include 'sidebar-empresa.php'; ?>
+					<?php include 'sidebar-noticias.php'; ?>
 
 				</div>
 			</div>
@@ -82,7 +66,26 @@
 <?php get_footer(); ?>
 
 <script type="text/javascript">
-	jQuery(document).ready(function(){
-		jQuery('.nav ul li.menu-empresa').addClass('active');
-	});
+	<?php if($post->post_name == 'area-de-atuacao'){ ?>
+
+		jQuery(document).ready(function(){
+			jQuery('.nav ul li.menu-area-de-atuacao').addClass('active');
+		});
+	
+	<?php }else{
+
+		if($post->post_name == 'qualidade'){ ?>
+
+			jQuery(document).ready(function(){
+				jQuery('.nav ul li.menu-qualidade').addClass('active');
+			});
+		
+		<?php }else{ ?>
+
+			jQuery(document).ready(function(){
+				jQuery('.nav ul li.menu-empresa').addClass('active');
+			});
+
+		<?php } 
+	} ?>
 </script>

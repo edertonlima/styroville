@@ -227,6 +227,43 @@ function paginacao() {
 
 
 	/* POST TYPE */
+	function representantes_post_type(){
+		register_post_type('representantes', array( 
+			'labels'            =>  array(
+				'name'          =>      __('Representantes'),
+				'singular_name' =>      __('Representantes'),
+				'all_items'     =>      __('Todos'),
+				'add_new'       =>      __('Adicionar'),
+				'add_new_item'  =>      __('Adicionar'),
+				'edit_item'     =>      __('Editar'),
+				'view_item'     =>      __('Visualizar'),
+				'search_items'  =>      __('Pesquisar'),
+				'no_found'      =>      __('Nenhum item encontrato'),
+				'not_found_in_trash' => __('A lixeira está vazia.')
+			),
+			'public'            =>  true,
+			'publicly_queryable'=>  true,
+			'show_ui'           =>  true, 
+			'query_var'         =>  true,
+			'show_in_nav_menus' =>  false,
+			'capability_type'   =>  'post',
+			'hierarchical'      =>  true,
+			'rewrite'=> [
+				'slug' => 'representantes',
+				"with_front" => false
+			],
+			"cptp_permalink_structure" => "/%post_id%/",
+			'menu_position'     =>  21,
+			'supports'          =>  array('title'),
+			'has_archive'       =>  true,
+			'menu_icon' => 'dashicons-groups'
+		));
+		flush_rewrite_rules();
+	}
+	add_action('init', 'representantes_post_type');
+
+
+	/* POST TYPE */
 	function clientes_post_type(){
 		register_post_type('minha-area', array( 
 			'labels'            =>  array(

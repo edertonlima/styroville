@@ -32,33 +32,9 @@
 			</div>
 
 			<div class="col-3 sidebar">
-				<h2>CATEGORIAS</h2>
-				<ul class="list-menu">
 
-					<?php
-						$args = array(
-						    'taxonomy'      => 'produtos_taxonomy',
-						    'parent'        => 0,
-						    'orderby'       => 'name',
-						    'order'         => 'ASC',
-						    'hierarchical'  => 1,
-						    'pad_counts'    => true,
-						    'hide_empty'    => 0
-						);
-						$categories = get_categories( $args );
-						foreach ( $categories as $categoria ){ ?>
+				<?php include 'sidebar-categorias.php'; ?>
 
-							<li>
-								<a href="<?php echo get_category_link($categoria->term_id); ?>" title="<?php echo $categoria->name; ?>">
-									<i class="fa fa-caret-right" aria-hidden="true"></i> <?php echo $categoria->name; ?>
-								</a>
-							</li>
-
-							<?php
-						}
-					?>
-
-				</ul>
 			</div>
 		</div>
 

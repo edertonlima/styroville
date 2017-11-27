@@ -36,9 +36,27 @@
 		</a>
 	</li>
 
-	<li class="<?php if(is_page('representantes')){ echo 'active'; } ?>">
+	<li class="<?php if(is_page('projeto-ecoeter')){ echo 'active'; } ?>">
+		<a href="<?php echo get_home_url(); ?>/projeto-ecoeter" title="<?php echo get_page_by_path('projeto-ecoeter')->post_title; ?>">
+			<i class="fa fa-caret-right" aria-hidden="true"></i> <?php echo get_page_by_path('projeto-ecoeter')->post_title; ?>
+		</a>
+	</li>
+
+	<li class="<?php if((is_archive('representantes')) and (!is_category('noticias'))){ echo 'active'; } ?>">
 		<a href="<?php echo get_home_url(); ?>/representantes" title="<?php echo get_page_by_path('representantes')->post_title; ?>">
 			<i class="fa fa-caret-right" aria-hidden="true"></i> <?php echo get_page_by_path('representantes')->post_title; ?>
+		</a>
+	</li>
+
+	<li class="<?php if(is_page('qualidade')){ echo 'active'; } ?>">
+		<a href="<?php echo get_home_url(); ?>/qualidade" title="<?php echo get_page_by_path('qualidade')->post_title; ?>">
+			<i class="fa fa-caret-right" aria-hidden="true"></i> <?php echo get_page_by_path('qualidade')->post_title; ?>
+		</a>
+	</li>
+
+	<li class="<?php if(is_page('area-de-atuacao')){ echo 'active'; } ?>">
+		<a href="<?php echo get_home_url(); ?>/area-de-atuacao" title="<?php echo get_page_by_path('area-de-atuacao')->post_title; ?>">
+			<i class="fa fa-caret-right" aria-hidden="true"></i> <?php echo get_page_by_path('area-de-atuacao')->post_title; ?>
 		</a>
 	</li>
 

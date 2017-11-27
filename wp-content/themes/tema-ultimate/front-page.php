@@ -30,26 +30,9 @@
 
 			<div class="col-4 sidebar">
 
-				<div class="sidebar-block noticias">
-					<h2>NOTÍCIAS</h2>
-
-					<ul class="list-noticias">
-						<?php query_posts(
-							array(
-								'post_type' => 'post',
-								'posts_per_page' => 3
-							)
-						);
-
-						while ( have_posts() ) : the_post(); 
-							get_template_part( 'content-noticias-list', 'post' );
-						endwhile;
-						wp_reset_query(); ?>
-					</ul>
-					<a href="<?php echo get_home_url(); ?>/noticias" title="Mais Notícias" class="mais-item">
-						<i class="fa fa-caret-right" aria-hidden="true"></i> Mais Notícias
-					</a>
-				</div>
+				<?php include 'sidebar-noticias.php'; ?>
+				<?php include 'sidebar-projeto-ecoeter.php'; ?>
+				<?php include 'sidebar-responsabilidade-social.php'; ?>
 
 			</div>
 		</div>

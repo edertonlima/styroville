@@ -207,12 +207,17 @@ a {
 		float: right;
 		color: $azul;
 		font-size: $font-size;
-		margin: 20px 0;
+		margin: 0px;
 
 		i {
 			color: $azul;
 			font-size: $font-size;
 			padding-right: 5px;
+
+			&.fa-long-arrow-right, &.fa-long-arrow-left {
+				display: block;
+				font-size: 2rem;
+			}
 		}
 
 		&:hover {
