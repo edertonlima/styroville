@@ -151,3 +151,74 @@
 		}
 	}
 }
+
+.img-home-sobre {
+	@media all and (max-width: 750px) {
+		max-width: 80% !important;
+		display: block;
+		margin: 20px auto;
+	}
+}
+
+.categoria-prod-home {
+	li {
+		border-left: 1px solid $cinza;
+
+		a {
+			margin-left: 10px;
+			&:hover {
+				color: $amarelo;
+			}
+		}
+
+		&:first-child, &:nth-child(3n+1) {
+			border: none;
+		}
+	}
+}
+
+.central-vendas, .trabalhe-conosco {
+	img {
+		margin-top: 20px;
+	}
+}
+
+.cartao-bndes {
+	margin-top: 40px;
+
+	img {
+		margin-top: 30px;
+	}
+
+	.itens-caracteristica {
+		margin: 30px 0 0px;
+
+		li {
+			line-height: 1.125rem;
+			font-size: 1.125rem;
+			margin-bottom: 11px;
+
+			i {
+				float: left;
+				width: 15px;
+				font-size: 1.3rem;
+				position: relative;
+				top: -1px;
+			}
+		}
+	}
+
+	a {
+		margin-top: 10px;
+	}
+
+	p {
+		margin: 20px 0 0 0;
+	}
+}
+
+.page {
+	.cartao-bndes {
+		margin-top: 0px;
+	}
+}

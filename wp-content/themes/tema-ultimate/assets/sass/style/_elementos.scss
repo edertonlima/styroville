@@ -3,21 +3,24 @@ strong {
 }
 
 h1 {
-	width: $wLogo;
-	margin-top: 20px;
 	padding: 0;
 	float: left;
+	width: 240px;
+	height: 129px;
+	background: url('../images/bg_logo.png') repeat-x 0 0;
 	@include animacao;
 
 	a {
 		img {
-			width: 100%;
+			width: 85%;
+			margin: 30px auto;
+			display: block;
 			@include animacao;
 		}
 
 		&:hover {
 			img {
-				opacity: .5;
+				opacity: .8;
 			}
 		}
 	}

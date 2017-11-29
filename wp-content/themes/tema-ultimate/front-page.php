@@ -1,5 +1,43 @@
 <?php get_header(); ?>
 
+<!-- slide -->
+<section class="box-content box-slide">
+	<div class="container">
+		<div class="slide">
+			<div class="carousel slide" data-ride="carousel" data-interval="6000" id="slide">
+
+				<div class="carousel-inner" role="listbox">
+
+					<?php
+						$slide = 0;
+						while ( have_rows('slide',$id_slide) ) : the_row();
+
+							if(get_sub_field('imagem')){
+								$slide = $slide+1; ?>
+
+								<div class="item <?php if($slide == 1){ echo 'active'; } ?>" style="background-image: url('');">
+									<img src="<?php the_sub_field('imagem'); ?>">
+								</div>
+
+							<?php }
+
+						endwhile;
+					?>
+
+				</div>
+
+				<ol class="carousel-indicators">
+					
+					<?php for($i=0; $i<$slide; $i++){ ?>
+						<li data-target="#slide" data-slide-to="<?php echo $i; ?>" class="<?php if($i == 0){ echo 'active'; } ?>"></li>
+					<?php } ?>
+					
+				</ol>
+
+			</div>
+		</div>
+	</div>
+</section>
 
 <section class="box-content">
 	<div class="container">
@@ -17,7 +55,7 @@
 					?>
 
 					<div class="col-4">
-						<img src="<?php the_field('logo_header', 'option'); ?>" alt="<?php the_field('titulo', 'option'); ?>">
+						<img src="<?php the_field('logo_header', 'option'); ?>" alt="<?php the_field('titulo', 'option'); ?>" class="img-home-sobre">
 						<p></p>
 						<p><?php echo get_the_excerpt(get_page_by_path('empresa')->ID); ?></p>
 						<a href="<?php echo get_home_url(); ?>/empresa" title="Mais Notícias" class="mais-item">
@@ -31,10 +69,107 @@
 			<div class="col-4 sidebar">
 
 				<?php include 'sidebar-noticias.php'; ?>
+
+			</div>
+		</div>
+
+	</div>
+</section>
+
+<section class="box-content no-padding-top">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-8">
+				<h2 class="tit-area">NOSSOS PRODUTOS</h2>
+
+				<div class="row">
+
+					<div class="col-12">
+						<p>Somos uma empresa 100% nacional, trabalhando constantemente no desenvolvimento de soluções em embalagens e tecidos de ráfia. Possuímos capacidade instalada para transformar 14.000 toneladas/ano de polipropileno em 8 milhões de sacos e 14 milhões de metros quadrados de tecidos ao mês atendendo os seguintes segmentos:</p>
+
+						<ul class="row categoria-prod-home">
+							<?php
+								$args = array(
+								    'taxonomy'      => 'produtos_taxonomy',
+								    'parent'        => 0,
+								    'orderby'       => 'name',
+								    'order'         => 'ASC',
+								    'hierarchical'  => 1,
+								    'pad_counts'    => true,
+								    'hide_empty'    => 0
+								);
+								$categories = get_categories( $args );
+								foreach ( $categories as $categoria ){ ?>
+
+									<li class="col-4">
+										<a href="<?php echo get_category_link($categoria->term_id); ?>" title="<?php echo $categoria->name; ?>">
+											- <?php echo $categoria->name; ?>
+										</a>
+									</li>
+
+									<?php
+								}
+							?>
+						</ul>
+
+						<a href="<?php echo get_home_url(); ?>/produtos" title="Mais Notícias" class="mais-item">
+							<i class="fa fa-caret-right" aria-hidden="true"></i> Saiba mais
+						</a>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="col-4 sidebar">
+
 				<?php include 'sidebar-projeto-ecoeter.php'; ?>
+
+			</div>
+		</div>
+
+	</div>
+</section>
+
+<section class="box-content no-padding-top">
+	<div class="container">
+
+		<div class="row">
+
+			<div class="col-8">
+				<div class="col-6">					
+					<?php include 'sidebar-central-vendas.php'; ?>
+				</div>
+
+				<div class="col-6">					
+					<?php include 'sidebar-trabalhe-conosco.php'; ?>
+				</div>
+
+				<div class="col-12">
+					<?php include 'sidebar-cartao-bndes.php'; ?>
+				</div>
+			</div>
+
+			<div class="col-4 sidebar">
+
 				<?php include 'sidebar-responsabilidade-social.php'; ?>
 
 			</div>
+		</div>
+
+	</div>
+</section>
+
+<section class="box-content no-padding-top">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-8">
+				
+				
+
+			</div>
+
 		</div>
 
 	</div>

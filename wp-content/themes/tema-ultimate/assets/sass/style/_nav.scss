@@ -1,6 +1,6 @@
 .nav {
 	width: auto;
-	right: 0;
+	right: 40px;
 	bottom: 13px;
 	position: absolute;
 	z-index: 9999;
@@ -25,6 +25,10 @@
 				padding: 0px 7px;
 				text-decoration: none;
 				text-shadow: 1px 1px 1px #000000;
+			}
+
+			&.menu-minha-area {
+				display: none;
 			}
 
 			&:hover {
@@ -108,7 +112,7 @@
 		}
 	}
 
-	@media all and (max-width: 1340px){
+	@media all and (max-width: 850px){
 		height: 100vh;
 		position: fixed;
 		display: table;
@@ -117,7 +121,7 @@
 		left: 0;
 		top: -110vh;
 		z-index: 9999;
-		background-color: $azul;
+		background-color: $amarelo;
 
 		ul {
 			vertical-align: middle;
@@ -125,6 +129,7 @@
 
 			li {
 				float: right;
+				margin: 5px 0;
 				padding-right: 150px;
 				display: block;
 				@include clear;
@@ -135,10 +140,11 @@
 					font-size: 2.5rem;
 					font-weight: $bold;
 					border: none;
+					text-shadow: none;
 
 					&:hover {
 						color: #ffffff;
-						opacity: .3;
+						opacity: .8;
 					}
 				}
 			}
@@ -160,7 +166,21 @@
 				
 				a {
 					font-size: 1.5rem;
-					line-height: 45px;
+				}
+			}
+		}
+	}
+}
+
+
+.header {
+	&.active {
+		.nav {
+			ul {
+				li {
+					&.menu-minha-area {
+						display: block;
+					}
 				}
 			}
 		}
@@ -178,12 +198,13 @@
 	position: relative;
 	z-index: 99999;
 
-	@media all and (max-width: 1340px) {
+	@media all and (max-width: 850px) {
 		display: block;
+		margin-top: 55px;
 	}
 
 	@media all and (max-width: 1100px) {
-		margin-top: 55px;
+		
 	}
 
 	span {
@@ -256,14 +277,14 @@
 		&:hover {
 
 			span, span:before, span:after {
-				background-color: $azul;
+				background-color: $amarelo;
 			}
 		}
 	}
 }
 
 @mixin menu-active {
-	background-position: center 30px;
+	background-position: center 31px;
 
 	&:hover {
 		opacity: 1;

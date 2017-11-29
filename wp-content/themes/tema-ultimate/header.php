@@ -109,10 +109,12 @@
 				jQuery('.nav').css('top','-110vh');
 				jQuery(this).removeClass('active');
 				jQuery('.header').removeClass('active');
+				jQuery('.box-busca').removeClass('active');
 			}else{
 				jQuery('.nav').css('top','0px');
 				jQuery(this).addClass('active');
 				jQuery('.header').addClass('active');
+				jQuery('.box-busca').addClass('active');
 			}
 		});
 
@@ -131,9 +133,16 @@
 	});
 	
 	jQuery(window).resize(function(){
-		/*jQuery('.menu-mobile').removeClass('active');
+		jQuery('.menu-mobile').removeClass('active');
 		jQuery('.header').removeClass('active');
-		jQuery('.nav').css('top','-110vh'); */
+		jQuery('.box-busca').removeClass('active');
+
+		width = jQuery(document).width();
+		if(width < 850){
+			jQuery('.nav').css('top','-110vh');
+		}else{
+			jQuery('.nav').css('top','auto');
+		}
 
 		if(((jQuery('body').height())+100) < jQuery(window).height()){
 			jQuery('.footer').css({position: 'absolute', bottom: '0px'});
@@ -162,7 +171,7 @@
 
 			<h1>
 				<a href="<?php echo get_home_url(); ?>" title="<?php the_field('titulo', 'option'); ?>">
-					<img src="<?php the_field('logo_header', 'option'); ?>" alt="<?php the_field('titulo', 'option'); ?>" style="display: none;">
+					<img src="<?php the_field('logo_header', 'option'); ?>" alt="<?php the_field('titulo', 'option'); ?>">
 				</a>
 			</h1>
 
@@ -191,138 +200,27 @@
 					<li class="menu-fale-conosco">
 						<a href="<?php echo get_home_url(); ?>/fale-conosco" title="FALE CONOSCO">FALE CONOSCO</a>
 					</li>
+
+					<li class="menu-minha-area">
+						<a href="<?php echo get_home_url(); ?>/minha-area" title="MINHA ÁREA">MINHA ÁREA</a>
+					</li>
 				</ul>
 			</nav>
 
 		</div>
-	</header>
 
-	<?php /*
-		if(is_category()){
-			$categoria_slide = get_the_category();
-			$id_slide = $categoria_slide[0]->taxonomy.'_'.$categoria_slide[0]->term_id;
-		}else{
-			$id_slide = '';
-		} */
-	?>
-
-	<?php /* if( have_rows('slide',$id_slide) ) { ?>
-
-		<!-- slide -->
-		<section class="box-content box-slide">
-			<div class="slide">
-				<div class="carousel slide" data-ride="carousel" data-interval="6000" id="slide">
-
-					<div class="carousel-inner" role="listbox">
-
-						<?php
-							$slide = 0;
-							while ( have_rows('slide',$id_slide) ) : the_row();
-
-								if(get_sub_field('video')){
-									$slide = $slide+1; ?>
-
-									<div class="item video <?php if($slide == 1){ echo 'active'; } ?>">
-										<video autoplay="true" loop="true" muted="true">
-											<source src="<?php the_sub_field('video'); ?>" type="video/mp4">
-										</video>
-
-										<?php if(get_sub_field('youtube')){ ?>
-											<div class="play">
-												<a href="javascript:" target="" data-target="#lightbox">
-													<i class="fa fa-youtube-play" aria-hidden="true" rel="<?php the_sub_field('youtube'); ?>"></i>
-												</a>
-											</div>
-										<?php }else{ ?>
-											<div class="container">
-												<div class="box-height">
-													<div class="box-texto">
-
-														
-														<p class="texto">
-															<?php if(get_sub_field('titulo')){ ?>
-																<span class="txt-slide"><?php the_sub_field('titulo'); ?></span>
-															<?php } ?>
-
-															<span class="box-btn">
-																<?php if(get_sub_field('titulo_link')){ ?>
-																	<a href="<?php the_sub_field('link'); ?>" title="<?php the_sub_field('titulo_link'); ?>" class="btn btn-slide">
-																		<?php the_sub_field('titulo_link'); ?>
-																	</a>
-																<?php } ?>
-															</span>
-														</p>
-														
-
-													</div>
-												</div>
-											</div>
-										<?php } ?>
-									</div>
-
-								<?php }else{
-									if(get_sub_field('imagem')){
-										$slide = $slide+1; ?>
-
-										<div class="item <?php if($slide == 1){ echo 'active'; } ?>" style="background-image: url('<?php the_sub_field('imagem'); ?>');">
-
-											<?php if((get_sub_field('titulo')) or (get_sub_field('subtitulo'))){ ?>
-												
-												<div class="container">
-													<div class="box-height">
-														<div class="box-texto">
-
-															<p class="texto">
-																<?php if(get_sub_field('titulo')){ ?>
-																	<span class="txt-slide"><?php the_sub_field('titulo'); ?></span>
-																<?php } ?>
-
-																<span class="box-btn">
-																	<?php if(get_sub_field('titulo_link')){ ?>
-																		<a href="<?php the_sub_field('link'); ?>" title="<?php the_sub_field('titulo_link'); ?>" class="btn btn-slide">
-																			<?php the_sub_field('titulo_link'); ?>
-																		</a>
-																	<?php }else{ ?>
-																		<span></span>
-																	<?php } ?>
-																</span>
-															</p>
-															
-														</div>
-													</div>
-												</div>
-
-											<?php } ?>
-
-										</div>
-
-									<?php }
-								}
-
-							endwhile;
-						?>
-
-					</div>
-
-					<ol class="carousel-indicators">
-						
-						<?php for($i=0; $i<$slide; $i++){ ?>
-							<li data-target="#slide" data-slide-to="<?php echo $i; ?>" class="<?php if($i == 0){ echo 'active'; } ?>"></li>
-						<?php } ?>
-						
-					</ol>
-
-					<a href="#goScrollOn" id="goScroll" class="scroll">
-						<img src="<?php echo get_template_directory_uri(); ?>/assets/images/seta_slide.png">
-					</a>
-
-				</div>
+		<dib class="box-busca">
+			<div class="link">
+				<a href="<?php echo get_home_url(); ?>" title="Página inicial">Página inicial</a>
+				<span>|</span>
+				<a href="<?php echo get_home_url(); ?>/minha-area" title="Minha área">Minha área</a>
 			</div>
-		</section>
-	<?php }else{ ?>
-		<section class="box-content no-padding no-slide">
-			<div class="slide"></div>
-		</section>
-	<?php } */ ?>
 
-	<?php //$rows = get_field('slide'); var_dump($rows); ?>
+			<form class="busca-header" role="search" method="get" id="searchform" action="<?php echo get_home_url(); ?>">
+				<fieldset>
+					<input value="" name="s" id="s" type="text" placeholder="BUSCA" />
+					<button type="submit">OK</button>
+				</fieldset>
+			</form>
+		</dib>
+	</header>

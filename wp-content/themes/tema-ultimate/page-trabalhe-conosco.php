@@ -31,24 +31,11 @@
 						wp_reset_query();
 					?>
 
-					<?php if(is_page('empresa')){ ?>
-						<div class="content-txt">
-							<div class="col-4">
-								<h4>Missão</h4>
-								<p><?php the_field('missao'); ?></p>
-							</div>
+					<p><?php the_excerpt(); ?></p>
 
-							<div class="col-4">
-								<h4>Visão</h4>
-								<p><?php the_field('visao'); ?></p>
-							</div>
-
-							<div class="col-4">
-								<h4>Valores</h4>
-								<p><?php the_field('valores'); ?></p>
-							</div>
-						</div>
-					<?php } ?>
+					<form>
+						
+					</form>
 					
 				</div>
 
@@ -66,26 +53,7 @@
 <?php get_footer(); ?>
 
 <script type="text/javascript">
-	<?php if($post->post_name == 'area-de-atuacao'){ ?>
-
-		jQuery(document).ready(function(){
-			jQuery('.nav ul li.menu-area-de-atuacao').addClass('active');
-		});
-	
-	<?php }else{
-
-		if($post->post_name == 'qualidade'){ ?>
-
-			jQuery(document).ready(function(){
-				jQuery('.nav ul li.menu-qualidade').addClass('active');
-			});
-		
-		<?php }else{ ?>
-
-			jQuery(document).ready(function(){
-				jQuery('.nav ul li.menu-empresa').addClass('active');
-			});
-
-		<?php } 
-	} ?>
+	jQuery(document).ready(function(){
+		jQuery('.nav ul li.menu-empresa').addClass('active');
+	});
 </script>

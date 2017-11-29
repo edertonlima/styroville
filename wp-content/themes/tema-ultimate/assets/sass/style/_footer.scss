@@ -22,37 +22,85 @@
 }
 
 .footer {
-	background-color: darken($azul-escuro,10%);
+	background-color: darken($cinza-escuro,10%);
 	width: 100%;
 	float: left;
+
+	h3 {
+		color: $amarelo;
+		font-size: 1rem;
+		margin-bottom: 15px;
+	}
+
+	.menu-footer {
+		li {
+			margin-bottom: 5px;
+			a {
+				color: #ffffff;
+
+				&:hover {
+					opacity: .8;
+				}
+			}
+		}
+
+		&.menu-institucional {
+			margin-top: 88px;
+		}
+	}
+
+	.contato-footer {
+		span {
+			color: #ffffff;
+			font-size: 1rem;
+
+			&.tel {
+				font-size: 1.3rem;
+			}
+		}
+
+		h4 {
+			margin-top: 20px;
+			color: #ffffff;
+			margin-bottom: 5px;
+		}
+
+		p {
+			color: #ffffff;
+		}
+	}
 
 	.copy {
 		width: 100%;
 		float: left;
 		position: relative;
+		margin: 40px 0 20px;
 		@include box-sizing;
-
-		.logo-footer {
-			width: 225px;
-			margin: 34px 0;
-			display: block;
-			vertical-align: middle;
-
-			img {
-				width: 100%;
-			}
-		}
 
 		p {
 			display: block;
-			text-align: right;
-			font-size: 1rem;
-			color: #ffffff;
-			line-height: 135px;
+			text-align: left;
+			font-size: .675rem;
+			color: $cinza;
+			opacity: .8;
 
 			i {
-				font-size: 1rem;
-				color: #ffffff;
+				font-size: .675rem;
+				color: $cinza;
+			}
+		}
+
+		.ultimate {
+			a {
+				font-size: .675rem;
+				color: $cinza;
+				opacity: .8;
+				float: right;
+				@include animacao;
+
+				&:hover {
+					color: #ffffff;
+				}
 			}
 		}
 	}
