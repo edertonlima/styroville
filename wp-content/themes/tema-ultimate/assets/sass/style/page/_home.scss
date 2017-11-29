@@ -222,3 +222,35 @@
 		margin-top: 0px;
 	}
 }
+
+.result-busca {
+	margin-bottom: 40px;
+
+	&:nth-child(2n+1){
+		@include clear;
+	}
+
+	.border {
+		border-bottom: 1px solid $cinza;
+		padding-bottom: 20px;
+		overflow: hidden;
+	}
+
+	img {
+		margin-bottom: 10px;
+	}
+
+	h4 {
+		margin-bottom: 5px;
+	}
+
+	h4, p, .content-txt {
+		padding: 0 15px!important;
+	}
+
+	&.produto {
+		.item-produto {
+			margin-top: 0!important;
+		}
+	}
+}

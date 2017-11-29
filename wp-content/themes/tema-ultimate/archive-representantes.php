@@ -57,15 +57,19 @@
 							<select name="estado" id="estado">
 								<option value="Selecione um Estado">Selecione um Estado</option>
 								
-								<?php foreach ($representantes as $key => $value) { ?>
+								<?php 
+									foreach ($representantes as $key => $value) { 
+										$estados[] = $value['estado'];
+									}
 
-									<option value="<?php echo $value['estado']; ?>"><?php echo $value['estado']; ?></option>
-
-								<?php } ?>										
+									foreach (array_unique($estados) as $estado) { ?>
+										<option value="<?php echo $estado; ?>"><?php echo $estado; ?></option>
+									<?php }
+								?>									
 
 							</select>
 						</div>
-					</div>
+					</div>	
 
 					<div class="col-6">
 						<div class="select">
@@ -76,9 +80,7 @@
 					</div>
 
 					<div class="col-12">
-						<ul class="list-representantes">
-							
-						</ul>
+						<ul class="list-representantes"></ul>
 					</div>
 					
 				</div>
@@ -141,23 +143,26 @@
 		jQuery("#estado").change(function(){
 			var cidade = '<option value="Selecione uma Cidade">Selecione uma Cidade</option>';
 			val_estado = jQuery('#estado option:selected').val();
+			var cidades = [];
 
 			if(val_estado != 'Selecione um Estado'){
-				jQuery.each(representantes, function (key, val) { //alert(val.cidade);
-					if(val.estado == val_estado) { //alert(val.estado+' = '+val_estado);
 
-						//alert(val.cidade);
-						cidade += '<option value="' + val.cidade + '">' + val.cidade + '</option>';
-
-						//jQuery.each(val.cidade, function (key_city, val_city) {
-							//cidade += '<option value="' + val_city + '">' + val_city + '</option>';
-						//});						
+				jQuery.each(representantes, function (key, val) {
+					if(val.estado == val_estado) {
+						cidades.push(val.cidade);
 					}
 				});
-				console.log(cidade);
+				cidades = cidades.filter(function(elem, pos, self) {
+					return self.indexOf(elem) == pos;
+				});
+
+				jQuery.each(cidades, function (key, val) {
+					cidade += '<option value="' + val + '">' + val + '</option>';
+				});
+
 				jQuery("#cidade").html(cidade).prop('disabled', false);
 			}else{
-				jQuery("#cidade").html(cidade).prop('disabled', true);
+				jQuery('#cidade').html(cidade).prop('disabled', true);
 			}
 		}).change();
 

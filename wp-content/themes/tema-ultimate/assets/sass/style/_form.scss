@@ -86,13 +86,13 @@ button, input[type='submit'], .btn {
 
 	&.enviar {
 		width: 100%;
-		background-color: $azul;
+		background-color: $amarelo;
 		color: #fff;
 		border: none;
 		font-weight: $regular;
 
 		&:hover {
-			background-color: darken($azul, 10%);
+			background-color: darken($amarelo, 10%);
 		}
 	}
 
@@ -163,6 +163,13 @@ button, input[type='submit'], .btn {
 	}
 }
 
+input[type='file']{
+	font-size: .8rem;
+	height: auto;
+	line-height: normal;
+	padding: 15px;
+}
+
 .input-radio, .input-checkbox {
 	display: block;
 	height: 50px;
@@ -208,12 +215,21 @@ form {
 	width: 90%;
 	@include clear();
 
+	&.form-padrao {
+		width: 100%;
+	}
+
 	input, textarea {
 		max-width: 100%;
 	}
 
 	fieldset {
 		margin-top: 10px;
+
+		.info-campo {
+			color: $amarelo;
+			margin-bottom: 10px;
+		}
 
 		&.center {
 			text-align: center;
@@ -224,23 +240,23 @@ form {
 		}
 
 		&.erro {
-			input {
-				border-color: $vermelho;
+			input, textarea {
+				border-color: $amarelo;
 
 				&::-webkit-input-placeholder {
-					color: $vermelho;
+					color: $amarelo;
 				}
 
 				&:-moz-placeholder {
-					color: $vermelho; 
+					color: $amarelo; 
 				}
 
 				&::-moz-placeholder {
-					color: $vermelho;
+					color: $amarelo;
 				}
 
 				&:-ms-input-placeholder {  
-					color: $vermelho;
+					color: $amarelo;
 				}
 			}
 		}
@@ -288,5 +304,6 @@ form {
 .msg-form {
 	text-align: center;
 	font-size: 1rem;
-	margin: -10px 0 10px;
+	margin: 0px 0 20px !important;
+	color: $amarelo;
 }

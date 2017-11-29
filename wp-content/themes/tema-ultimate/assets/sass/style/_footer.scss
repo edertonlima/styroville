@@ -49,27 +49,6 @@
 		}
 	}
 
-	.contato-footer {
-		span {
-			color: #ffffff;
-			font-size: 1rem;
-
-			&.tel {
-				font-size: 1.3rem;
-			}
-		}
-
-		h4 {
-			margin-top: 20px;
-			color: #ffffff;
-			margin-bottom: 5px;
-		}
-
-		p {
-			color: #ffffff;
-		}
-	}
-
 	.copy {
 		width: 100%;
 		float: left;
@@ -137,6 +116,37 @@
 				bottom: 48px;
 				right: 10px;
 			}
+		}
+	}
+}
+
+.contato-footer {
+	span {
+		color: #ffffff;
+		font-size: 1rem;
+		display: block;
+
+		&.tel {
+			font-size: 1.3rem;
+		}
+	}
+
+	h4 {
+		margin-top: 20px;
+		color: #ffffff;
+		margin-bottom: 5px;
+	}
+
+	p {
+		color: #ffffff;
+	}
+
+	&.page {
+		padding-left: 50px;
+		margin-bottom: 20px;
+		
+		span, h4, p {
+			color: $cor-txt;
 		}
 	}
 }

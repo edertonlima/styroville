@@ -48,7 +48,20 @@
 								<p><?php the_field('valores'); ?></p>
 							</div>
 						</div>
-					<?php } ?>
+					<?php }
+
+					if(is_page('nossa-equipe')){
+						if( have_rows('nossa_equipe') ): ?>
+							<div class="content-txt nossa-equipe">
+							<?php while ( have_rows('nossa_equipe') ) : the_row(); ?>
+								<li class="col-4">
+									<img src="<?php the_sub_field('imagem'); ?>" alt="<?php the_sub_field('nome'); ?>">
+									<h4><?php the_sub_field('nome'); ?></h4>
+								</li>
+							<?php endwhile; ?>
+							</div>
+						<?php endif;
+					} ?>
 					
 				</div>
 
