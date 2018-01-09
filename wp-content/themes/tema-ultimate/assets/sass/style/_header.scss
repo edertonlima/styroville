@@ -76,6 +76,40 @@
 			}
 		}
 
+		.cart-orcamento {
+			display: inline-block;
+			margin-left: 15px;
+			position: relative;
+
+			i {
+				font-size: 1.4rem;
+				position: relative;
+				top: 3px;
+				color: $cor-txt;
+			}
+
+			span {
+				font-size: .5rem;
+				position: absolute;
+				background-color: $laranja;
+				border-radius: 50%;
+				color: $cor-txt;
+				width: 20px;
+				height: 20px;
+				display: block;
+				text-align: center;
+				line-height: 20px;
+				right: -14px;
+				top: -1px;
+			}
+
+			&:hover {
+				i {
+					color: darken($laranja, 5%);
+				}
+			}
+		}
+
 		@media all and (max-width: 1000px) {
 			width: 60%;
 		}

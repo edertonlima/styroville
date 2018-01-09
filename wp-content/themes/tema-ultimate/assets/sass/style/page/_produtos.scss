@@ -54,6 +54,16 @@
 				margin-top: 20px;
 			}
 
+			.det-tec-produto {
+				span {
+					margin-right: 20px;
+
+					&:last-child {
+						margin-right: 0px;
+					}
+				}
+			}
+
 			.nav-tab {
 				border-bottom: 2px solid $cinza;
 				height: 32px;
@@ -180,14 +190,18 @@
 			}
 
 			&.img-principal {
-				border: 1px solid $cinza;
 				position: relative;
 				text-align: center;
 				width: 100%;
 				margin-top: 50px;
 
 				a {
-					border: none;
+					border: 1px solid $cinza;
+				}
+
+				img {
+					margin: 0!important;
+					width: 100%;
 				}
 
 				i {
@@ -202,13 +216,19 @@
 				}
 
 				&:hover {
-					border-color: $azul;
+					a {
+						border-color: $azul;
+					}
 
 					i {
 						opacity: 1;
 						color: $azul;
 					}
 				}
+			}
+
+			&:nth-child(7), &:nth-child(12), &:nth-child(17) {
+				@include clear;
 			}
 		}
 	}

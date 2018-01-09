@@ -1,6 +1,9 @@
 <?php get_header(); ?>
 
-	<?php $terms = wp_get_post_terms( $post->ID, $post->post_type.'_taxonomy' ); //var_dump($terms); ?>
+	<?php 
+		$terms = wp_get_post_terms( $post->ID, $post->post_type.'_taxonomy' );
+		$categoria_id = $terms[0]->term_id;
+	?>
 	<?php $post_type = get_post_type_object( $post->post_type ); ?>
 
 	<?php //$taxonomy = get_queried_object(); var_dump($taxonomy) ?>

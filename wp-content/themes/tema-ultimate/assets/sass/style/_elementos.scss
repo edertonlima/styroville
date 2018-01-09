@@ -264,3 +264,135 @@ a {
 .table-responsive {
 	
 }
+
+table {
+	width: 100%;
+
+	&#confirmar-pedido, &#confirmar-orcamento {
+		margin: 50px 0 0;
+
+		tr {
+			td, th {
+				padding: 10px;
+
+				&.center {
+					text-align: center;
+				}
+
+				&.right {
+					text-align: right;
+				}
+			}
+
+			td {
+				font-size: .875rem;
+			}
+
+			th {
+				font-weight: $bold;
+				font-size: 1rem;
+			}
+		}
+
+		thead {
+			tr {
+				th {
+					border-bottom: 2px solid $cinza-escuro;
+				}
+			}
+		}
+
+		tbody {
+			tr {
+				td {
+					border-top: 1px solid #ddd;
+				}
+
+				&:first-child {
+					td {
+						border: none;
+					}
+				}
+			}
+		}
+
+		tfoot {
+			tr {
+				th {
+					border-top: 2px solid $cinza-escuro;
+				}
+			}
+		}
+	}
+
+	&#confirmar-orcamento {
+		tr {
+			td.qtd {
+				input {
+					height: 30px;
+					line-height: 30px;
+					padding: 0 5px;
+					margin: 0;
+					font-size: .875rem;
+					text-align: center;
+				}
+			}
+
+			td {
+				.remove-item {
+					i {
+						font-size: 1.25rem;
+						top: 3px;
+						position: relative;
+						color: $vermelho;
+					}
+
+					&:hover {
+						i {
+							color: darken($vermelho,10%);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.paginacao {
+	display: block;
+	margin: 50px 0;
+	text-align: center;
+
+	li {
+		display: inline-block;
+
+		a, span {
+			display: block;
+			line-height: 30px;
+			padding: 0 12px;
+			font-size: 1rem;
+		}
+
+		.current {
+			background-color: $laranja;
+			color: #ffffff;
+			font-weight: $bold;
+		}
+
+		a {
+			@include animacao;
+			&.prev, &.next {
+				top: 4px;
+				position: relative;
+			}
+
+			&:hover {
+				color: $laranja;
+
+				i {
+					color: $laranja;
+				}
+			}
+		}
+	}
+}

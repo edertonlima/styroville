@@ -22,18 +22,56 @@
 					?>
 
 					<div class="contato-footer page">
-						<span class="tel">+55 (49) 3674.0000</span>
-						<span class="email">comercial@styroville.com.br</span>
 
-						<h4>Horário de Atendimento</h4>
-						<p>08:00 as 12:00 - 13:30 as 18:00</p>			
+						<div class="col-6">
+							<?php if(get_field('telefone','option')){ ?>
+								<span class="tel">
+									<?php the_field('telefone','option');
+									if(get_field('info_telefone','option')){ ?>
+										<span><?php the_field('info_telefone','option'); ?></span>
+									<?php } ?>
+								</span>
+							<?php } ?>
+
+							<?php if(get_field('celular','option')){ ?>
+								<span class="tel">
+									<?php the_field('celular','option');
+									if(get_field('info_celular','option')){ ?>
+										<span><?php the_field('info_celular','option'); ?></span>
+									<?php } ?>
+								</span>
+							<?php } ?>
+
+							<?php if(get_field('email','option')){ ?>
+								<span class="email"><?php the_field('email','option'); ?></span>
+							<?php } ?>
+						</div>
+
+						<div class="col-6">
+							<?php if(get_field('horario_atendimento','option')){ ?>
+								<h4>Horário de Atendimento</h4>
+								<p><?php the_field('horario_atendimento','option'); ?></p>
+							<?php } ?>
+						</div>		
 					</div>
 
-					<p><?php the_excerpt(); ?></p>
+					<?php if( have_rows('nossa_equipe') ): ?>
+							<div class="content-txt nossa-equipe">
+							<?php while ( have_rows('nossa_equipe') ) : the_row(); ?>
+								<li class="col-4">
+									<img src="<?php the_sub_field('imagem'); ?>" alt="<?php the_sub_field('nome'); ?>">
+									<h4><?php the_sub_field('nome'); ?></h4>
+								</li>
+							<?php endwhile; ?>
+							</div>
+					<?php endif;  ?>
+
+					<?php //the_excerpt(); ?>
 
 					<div class="row">
 						<form action="javascript:" class="form-padrao">
 							<fieldset class="col-12">
+								<h4 style="margin-top: 50px;">Envie sua mensagem para nós:</h4>
 								<p class="msg-form"></p>
 							</fieldset>
 							<fieldset class="col-12">

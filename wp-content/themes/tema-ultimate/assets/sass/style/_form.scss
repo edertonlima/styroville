@@ -160,6 +160,31 @@ button, input[type='submit'], .btn {
 			color: #ffffff;
 			margin-right: 2px;
 		}
+
+		&.off {
+			cursor: no-drop;
+			opacity: .6;
+
+			&:hover {
+				background-color: $vermelho;
+			}
+		}
+	}
+
+	&.pedido {
+		color: $azul;
+
+		i {
+			color: $azul;
+		}
+
+		&:hover {
+			color: #fff;
+
+			i {
+				color: #fff;
+			}
+		}
 	}
 }
 
@@ -222,42 +247,42 @@ form {
 	input, textarea {
 		max-width: 100%;
 	}
+}
 
-	fieldset {
-		margin-top: 10px;
+fieldset {
+	margin-top: 10px;
 
-		.info-campo {
-			color: $amarelo;
-			margin-bottom: 10px;
-		}
+	.info-campo {
+		color: $amarelo;
+		margin-bottom: 10px;
+	}
 
-		&.center {
-			text-align: center;
-		}
+	&.center {
+		text-align: center;
+	}
 
-		&:first-child {
-			margin: 0;
-		}
+	&:first-child {
+		margin: 0;
+	}
 
-		&.erro {
-			input, textarea {
-				border-color: $amarelo;
+	&.erro {
+		input, textarea {
+			border-color: $amarelo;
 
-				&::-webkit-input-placeholder {
-					color: $amarelo;
-				}
+			&::-webkit-input-placeholder {
+				color: $amarelo;
+			}
 
-				&:-moz-placeholder {
-					color: $amarelo; 
-				}
+			&:-moz-placeholder {
+				color: $amarelo; 
+			}
 
-				&::-moz-placeholder {
-					color: $amarelo;
-				}
+			&::-moz-placeholder {
+				color: $amarelo;
+			}
 
-				&:-ms-input-placeholder {  
-					color: $amarelo;
-				}
+			&:-ms-input-placeholder {  
+				color: $amarelo;
 			}
 		}
 	}

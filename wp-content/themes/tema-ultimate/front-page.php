@@ -55,7 +55,7 @@
 					?>
 
 					<div class="col-4">
-						<img src="<?php the_field('logo_header', 'option'); ?>" alt="<?php the_field('titulo', 'option'); ?>" class="img-home-sobre">
+						<img src="<?php the_field('logo_header', 'option'); ?>" alt="<?php the_field('titulo', 'option'); ?>" class="img-home-sobre" style="display: none;">
 						<p></p>
 						<p><?php echo get_the_excerpt(get_page_by_path('empresa')->ID); ?></p>
 						<a href="<?php echo get_home_url(); ?>/empresa" title="Mais Notícias" class="mais-item">
@@ -86,7 +86,7 @@
 				<div class="row">
 
 					<div class="col-12">
-						<p>Somos uma empresa 100% nacional, trabalhando constantemente no desenvolvimento de soluções em embalagens e tecidos de ráfia. Possuímos capacidade instalada para transformar 14.000 toneladas/ano de polipropileno em 8 milhões de sacos e 14 milhões de metros quadrados de tecidos ao mês atendendo os seguintes segmentos:</p>
+						<p><?php the_field('resumo_produtos'); ?></p>
 
 						<ul class="row categoria-prod-home">
 							<?php
@@ -320,3 +320,5 @@
 		}
 	});
 </script>
+
+

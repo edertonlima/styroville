@@ -60,6 +60,8 @@
 		header('Location: '.$url);
 
 	}
+
+	$produtoOK = false;
 ?>
 
 <?php get_header(); ?>
@@ -97,8 +99,20 @@
 			<div class="col-9">
 				<div class="cont-tab-area" id="novo-pedido">
 
-					<div class="table-responsive">
-						<table class="table">
+					<h3>Bem vindo, <strong><?php the_title(); ?></strong></h3>
+
+					<div class="pesquisa" style="width: 100%; float: left; clear: both; margin-top: 24px;">
+						<label class="" rel="table-categorias" style="line-height: 48px; float: left; text-align: right;">Categoria: </label>
+						<select name="table-categoria" id="table-categoria" style="float: left; width: 200px; font-size: 14px; margin: 0 0 0 15px; margin-right: 0px; border: 1px solid #3f3f40; border-radius: 5px; line-height: 50px; height: 50px; height: 50px; padding: 0 10px; margin-right: 30px;">
+							<option value="">Todas as categorias</option>
+						</select>
+
+						<label class="" rel="table-pesquisa" style="line-height: 48px; float: left; text-align: right;">Pesquisar: </label>
+						<input type="text" class="" name="table-pesquisa" id="table-pesquisa" onkeyup="filtro_produtos()" placeholder="Digite um nome.." style="width: 200px; font-size: 14px; margin: 0 0 0 15px;">
+					</div>
+
+					<div class="table-responsive" style="display: block; clear: both;">
+						<table class="table" id="table-produtos">
 							<tbody>
 
 								<?php 
@@ -111,60 +125,109 @@
 										)
 									); 
 
-								 while ( have_posts() ) : the_post(); 
+									$qtd = 0;
+									//$term_prods = array();
+									while ( have_posts() ) : the_post(); 
+										$qtd++;
+										$class_term = '';
+										$term_atual = '';
 
-										$imagem = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail' ); ?>
+											if( have_rows('precos') ){
 
-										<tr>
-											<td width="30">
-												<div class="input-checkbox center">
-													<label>
-														<input type="checkbox" name="<?php echo $post->ID; ?>" id="<?php echo $post->ID; ?>" value="<?php echo $post->ID; ?>">
-													</label>
-												</div>
-											</td>
-											<td width="80">
-												<label for="<?php echo $post->ID; ?>">
-													<img src="<?php echo $imagem[0]; ?>" alt="<?php the_title(); ?>">
-												</label>
-											</td>
-											<td>
-												<label for="<?php echo $post->ID; ?>">
-													<h4><?php the_title(); ?></h4></td>
-												</label>
-											</td>
-											<td class="preco">
-												<?php if( have_rows('precos') ){
-
-													$preco = false;
-													while ( have_rows('precos') ) : the_row();
-														if($grupo == get_sub_field('grupo_cliente')){
-															echo 'R$ '.get_sub_field('preco');
-															$preco = true;
-															break;
-														}
-													endwhile;
-
-													if(!$preco){
-														echo '<span class="preco_off">Preço não<br>disponível</span>';
+												while ( have_rows('precos') ) : the_row();
+													if($grupo == get_sub_field('grupo_cliente')){
+														$preco = get_sub_field('preco');
+														$produtoOK = true;
+														break;
 													}
+												endwhile;
+											}
 
-												}else{
-													echo '<span class="preco_off">Preço não<br>disponível</span>';
-												} ?>
-											</td>
-											<td class="qtd" width="130">
-												<h4 class="qtd">QTD:</h4>
-												<input type="text" name="qtd" placeholder="0">
-											</td>
-										</tr>
+											if($produtoOK){ 
+												//if($qtd==1){
+													//var_dump($post);
+													$term_atual = wp_get_post_terms( $post->ID,'produtos_taxonomy' );
+													//echo '<br><br><br>';
+													//print_r($term_atual);
+													//echo '<br><br><br>';
+													foreach ($term_atual as $key => $value) {
+														//print_r($value);
+														$term_prods[$value->term_id] = array($value->slug, $value->name);
+														$class_term .= ' '.$value->slug; 
+														//echo $value->slug;
+														//echo '<br>';
+													}
+													//$term_prods[] = $term_atual[0]->term_id;
+													//print_r($term_prods);
+													//echo '<br>'.$class_term;
+												//}
+												$imagem = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail' ); ?>
 
-								<?php endwhile;
-								wp_reset_query(); ?>
+												<tr class="<?php echo $class_term; ?>">
+													<td width="30">
+														<div class="input-checkbox center">
+															<label>
+																<input type="checkbox" name="<?php echo $post->ID; ?>" id="<?php echo $post->ID; ?>" item-nome="<?php the_title(); ?>" item-foto="" item-preco="<?php echo $preco; ?>" value="<?php echo $post->ID; ?>">
+															</label>
+														</div>
+													</td>
+													<td width="80">
+														<label for="<?php echo $post->ID; ?>">
+															<img src="<?php echo $imagem[0]; ?>" alt="<?php the_title(); ?>">
+														</label>
+													</td>
+													<td>
+														<label for="<?php echo $post->ID; ?>">
+															<h4 class="nome"><?php the_title(); ?></h4></td>
+														</label>
+													</td>
+													<td class="preco" width="120">
+														<?php echo 'R$ '.formata_moeda($preco); ?>
+														<?php /* if( have_rows('precos') ){
+
+															$preco = false;
+															while ( have_rows('precos') ) : the_row();
+																if($grupo == get_sub_field('grupo_cliente')){
+																	echo 'R$ '.formata_moeda(get_sub_field('preco'));
+																	$preco = true;
+																	break;
+																}
+															endwhile;
+
+															if(!$preco){
+																echo '<span class="preco_off">Preço não<br>disponível</span>';
+															}
+
+														}else{
+															echo '<span class="preco_off">Preço não<br>disponível</span>';
+														} */?>
+													</td>
+													<td class="qtd" width="130">
+														<h4 class="qtd">QTD:</h4>
+														<input type="text" name="qtd<?php echo $post->ID; ?>" placeholder="1" value="1">
+													</td>
+												</tr>
+											<?php } ?>
+
+									<?php endwhile;
+									wp_reset_query(); ?>
 
 							</tbody>
 						</table>
 					</div>
+
+					<?php if($produtoOK){ ?>
+
+						<p class="msg-pedido"></p>
+						<a href="javascript:" title="Solicitar Orçamento" id="confirmar-pedido" class="btn pedido">
+							<i class="fa fa-shopping-cart" aria-hidden="true"></i> Confirmar Pedido
+						</a>
+
+					<?php }else{ ?>
+
+						<p>Nenhum produto encontrado.</p>
+
+					<?php } ?>
 
 				</div>
 				<div class="cont-tab-area" id="meus-pedidos">
@@ -278,7 +341,7 @@
 						</a>
 					</li>
 
-					<li class="" id="menu-meus-pedidos">
+					<li class="" id="menu-meus-pedidos" style="display: none;">
 						<a href="<?php echo get_post_permalink($post->ID); ?>/#meus-pedidos" title="Meus Pedidos">
 							<i class="fa fa-caret-right" aria-hidden="true"></i> Meus Pedidos
 						</a>
@@ -297,9 +360,237 @@
 	</div>
 </section>
 
+<div class="bg-modal" id="modal-pedido">
+	<div class="box-modal">
+		<div class="modal-conteudo">
+
+			<i class="fa fa-times close-modal" aria-hidden="true"></i>
+			<h2>Novo Pedido</h2>
+			<p class="msg center"></p>
+
+			<div class="content-modal"></div>
+
+			<a href="javascript:" title="Solicitar Orçamento" id="enviar-pedido" class="btn orcamento">
+				<i class="fa fa-shopping-cart" aria-hidden="true"></i> Enviar Pedido
+			</a>
+		</div>
+	</div>
+</div>
+
+<?php //var_dump($term_prods); $term_prods = array_unique($term_prods); echo '<br><br>'; ?>
+<?php //var_dump($term_prods); ?>
+
 <?php get_footer(); ?>
 
 <script type="text/javascript">
+
+function filtro_produtos() {
+	filter_categoria = jQuery('#table-categoria').val();
+	filter_busca = jQuery('#table-pesquisa').val().toUpperCase();
+	//alert(filter_busca);
+
+				if((filter_categoria != '') && (filter_busca != '')){
+					//alert(filter_categoria+' / '+filter_busca);
+
+					jQuery('#table-produtos tr').each(function(){
+						nome_produto = jQuery('.nome',this).html().toUpperCase();
+						//alert(nome_produto);
+
+						if(jQuery(this).hasClass(filter_categoria)){
+
+							if(nome_produto.indexOf(filter_busca) > -1) {
+								//alert('tem');
+								jQuery(this).show();
+							}else{
+								//alert('não tem');
+								jQuery(this).hide();
+							}
+
+						}else{
+							jQuery(this).hide();
+						}
+					});
+
+				}else{
+					if(filter_categoria == ''){
+						jQuery('#table-produtos tr').each(function(){
+							nome_produto = jQuery('.nome',this).html().toUpperCase();
+
+								if(nome_produto.indexOf(filter_busca) > -1) {
+									//alert('tem');
+									jQuery(this).show();
+								}else{
+									//alert('não tem');
+									jQuery(this).hide();
+								}
+						});
+					}else{
+						jQuery('#table-produtos tr').each(function(){
+							nome_produto = jQuery('.nome',this).html().toUpperCase();
+
+							if(jQuery(this).hasClass(filter_categoria)){
+
+								jQuery(this).show();
+
+							}else{
+								jQuery(this).hide();
+							}
+						});
+					}
+				}
+
+
+}
+
+	jQuery(document).ready(function(){
+		<?php
+		//var_dump($term_prods);
+		//echo '<br><br>';
+
+			if(count($term_prods) > 0){
+				$select_categorias = '';
+				//print_r($term_prods);
+				//echo '<br><br>';
+				//$term_prods = array_unique($term_prods); print_r($term_prods);
+
+				foreach ($term_prods as $key => $value) { //var_dump($value);
+					/*echo '<br>';
+					echo 'slug = '.$value[0];
+					echo '<br>';
+					echo 'name = '.$value[1];*/
+					$option_categorias .= '<br> <option value="'.$value[0].'">'.$value[1].'</option>';
+				}
+
+				echo "jQuery('#table-categoria').append('".$option_categorias."');";
+			}
+		?>
+
+		jQuery('#table-categoria').change(function(){
+			filtro_produtos();
+
+			/*filter_categoria = jQuery(this).val();
+			jQuery('#table-produtos tr').each(function(){
+				if(jQuery(this).hasClass(filter_categoria)){
+
+					jQuery(this).show();
+					//myFunction();
+
+				}else{
+					jQuery(this).hide();
+				}
+			});*/
+		});
+	});
+
+	function myFunction() { /*
+		var input, filter, table, tr, td, i;
+
+		filter_categoria = jQuery('#table-categoria').val();
+
+		input = document.getElementById("table-pesquisa");
+		filter = input.value.toUpperCase();
+		table = document.getElementById("table-produtos");
+		tr = table.getElementsByTagName("tr");
+		for (i = 0; i < tr.length; i++) {
+			td = tr[i].getElementsByTagName("td")[0];
+			if (td) {
+				if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+					tr[i].style.display = "";
+				} else {
+					tr[i].style.display = "none";
+				}
+			}       
+		}*/
+	}
+
+	var produtos = [];
+	var preco_total = 0;
+
+	jQuery('#confirmar-pedido').click(function() {
+		jQuery('.msg-pedido').html('');
+		qtd_item = 0;
+		preco = 0;
+		item = '<table id="confirmar-pedido">';
+			item += '<thead>';
+				item += '<tr>';
+					item += '<th width="120" class="center">Qtd.</th>';
+					item += '<th>Produto</th>';
+					item += '<th width="150">Preço</th>';
+				item += '</tr>';
+			item += '</thead>';
+			item += '<tbody>';
+
+		jQuery('.input-checkbox input').each(function(){
+			if(jQuery(this).is(':checked')){
+				qtd_item = qtd_item+1;
+				id = jQuery(this).val();
+				nome = jQuery(this).attr('item-nome');
+				preco = jQuery(this).attr('item-preco');
+				preco_total = parseFloat(preco_total)+parseFloat(preco);
+				qtd_produto = jQuery('input[name="qtd'+id+'"]').val();
+
+				produtos.push({'id':id, 'nome':nome, 'preco':Number(preco).toFixed(2).replace('.', ','), 'qtd':qtd_produto});
+
+				item += '<tr>';
+					item += '<td class="center">'+qtd_produto+'</td>';
+					item += '<td><strong>'+nome+'</strong></td>';
+					item += '<td>R$ '+Number(preco).toFixed(2).replace('.', ',')+'</td>';
+				item += '</tr>';
+			}
+		});
+			preco_total = Number(preco_total).toFixed(2).replace('.', ',');
+			item += '</tbody>';
+			item += '<tfoot>';
+				item += '<tr>';
+					item += '<th></th>';
+					item += '<th class="right">TOTAL: </th>';
+					item += '<th>R$ '+preco_total+'</th>';
+				item += '</tr>';
+			item += '</tfoot>';
+		item += '</table>';
+
+		if(qtd_item > 0){
+			jQuery('#modal-pedido .content-modal').html(item);
+			jQuery('#modal-pedido').css('display','table');
+		}else{
+			jQuery('.msg-pedido').html('Você precisa selecionar pelo menos um produto.');
+		}
+	});
+
+	jQuery('#enviar-pedido').click(function(){
+		nome_cliente = '<?php echo $post->post_title; ?>';
+		email_cliente = '<?php echo get_field('email',$post->ID); ?>';
+		para = '<?php the_field('email', 'option'); ?>';
+		nome_site = '<?php the_field('titulo', 'option'); ?>';
+		produtos = JSON.stringify(produtos);
+
+		console.log(produtos);
+		console.log(JSON.stringify(produtos));
+
+		//url = '<?php echo get_home_url(); ?>/?produtos=' + produtos;
+		//window.location.replace(url);
+
+		jQuery.getJSON("<?php echo get_template_directory_uri(); ?>/pedido.php", { nome_cliente:nome_cliente, email_cliente:email_cliente, produtos:produtos, para:para, nome_site:nome_site, preco_total:preco_total }, function(result){		
+			if(result=='ok'){
+				jQuery('.msg-pedido').html('Pedido enviado com sucesso! Obrigado.');
+
+				jQuery('.input-checkbox input').each(function(){
+					if(jQuery(this).is(':checked')){
+						jQuery(this).prop('checked', false);
+					}
+				});
+
+			}else{
+				jQuery('.msg-pedido').html('Desculpe, não foi possível enviar o seu pedido. Por favor, tente mais tarde.');
+			}
+
+			jQuery('#modal-pedido .content-modal').html('');
+			jQuery('#modal-pedido').css('display','none');
+		});
+
+
+	});
+
 	jQuery("form.cadastro").submit(function(event){
 		jQuery('.enviar').html('Enviando').prop( "disabled", true );
 		jQuery('.msg-form').removeClass('erro ok').html('');
@@ -474,4 +765,36 @@
 	   jQuery(".mask-cnpj").mask("99.999.999/9999-99");
 	   jQuery(".mask-cep").mask("99999-999");
 	});
+</script>
+
+<script type="text/javascript">/*
+	jQuery.noConflict();
+	jQuery(document).ready(function(){
+		/*jQuery('td', 'table').each(function(i) {
+			jQuery(this).text(i+1);
+		});*
+
+jQuery('#table-produtos').each(function() {
+    var currentPage = 0;
+    var numPerPage = 10;
+    var $table = jQuery(this);
+    $table.bind('repaginate', function() {
+        $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
+    });
+    $table.trigger('repaginate');
+    var numRows = $table.find('tbody tr').length;
+    var numPages = Math.ceil(numRows / numPerPage);
+    var $pager = jQuery('<div class="pager"></div>');
+    for (var page = 0; page < numPages; page++) {
+        jQuery('<span class="page-number"></span>').text(page + 1).bind('click', {
+            newPage: page
+        }, function(event) {
+            currentPage = event.data['newPage'];
+            $table.trigger('repaginate');
+            jQuery(this).addClass('active').siblings().removeClass('active');
+        }).appendTo($pager).addClass('clickable');
+    }
+    $pager.insertBefore($table).find('span.page-number:first').addClass('active');
+});
+	});*/
 </script>

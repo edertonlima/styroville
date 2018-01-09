@@ -19,16 +19,24 @@
 			</div>
 
 			<div class="col-9">
+				<?php if(have_posts()){ ?>
 				<div class="row">
 					<?php
+						
 						while ( have_posts() ) : the_post(); 
 							
 							get_template_part( 'content-produtos-list', 'post' );
 
 						endwhile;
 						wp_reset_query();
+						
 					?>
 				</div>
+				<?php }else{ ?>
+					<h3><p>Nenhum produto encontrado.</p></h3>
+				<?php } ?>
+
+				<?php paginacao(); ?>
 			</div>
 
 			<div class="col-3 sidebar">

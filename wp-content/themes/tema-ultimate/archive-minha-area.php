@@ -1,7 +1,7 @@
 <?php 
 	session_start();
 
-	if(isset($_SESSION['id'])){ echo $_SESSION['id']; //echo '<br>tem session';
+	if(isset($_SESSION['id'])){ //echo '<br>tem session';
 		
 		$url = get_post_permalink($_SESSION['id']).'#novo-pedido';
 		header('Location: '.$url);

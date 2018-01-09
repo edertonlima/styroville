@@ -142,11 +142,17 @@
 	}
 
 	&.page {
-		padding-left: 50px;
+		//padding-left: 50px;
+		overflow: hidden;
 		margin-bottom: 20px;
+		margin-top: 20px;
 		
 		span, h4, p {
 			color: $cor-txt;
+		}
+
+		h4 {
+			margin-top: 0;
 		}
 	}
 }

@@ -405,7 +405,7 @@ function paginacao() {
 					$conteudo = '<h2>Olá '.$post->post_title.', seja muito bem vindo à '.$nome_admin.'.</h2>
 					<p>Seu cadastro foi aprovado pela nossa equipe comercial e agora você já pode acessar a nossa área restrita e realizar os seus pedidos.</p>
 					<h4><strong>Dados de acesso:</strong></h4>
-					<p><strong>Usuário: </strong>'.get_field('status',$post_id).'<br><strong>Senha: </strong>'.get_field('senha',$post_id).'</p>
+					<p><strong>Usuário: </strong>'.get_field('usuario',$post_id).'<br><strong>Senha: </strong>'.get_field('senha',$post_id).'</p>
 					<p>Acesse a nossa área restrita <a href="'.get_home_url().'/minha-area" title="Acessar área restrita" target="_blank">clicando aqui.</a></p>
 					';
 
@@ -513,5 +513,16 @@ function paginacao() {
 		}
 	}
 
+	function formata_moeda($valor){
+		$valor = number_format($valor, 2);
+		//$valor_real = str_replace($valor, '.', ',');
 
+$frase  = $valor;
+$saudavel = array(',', '.');
+$saboroso   = array('', ',');
+
+$valor_real = str_replace($saudavel, $saboroso, $frase);
+
+		return $valor_real;
+	}
 ?>

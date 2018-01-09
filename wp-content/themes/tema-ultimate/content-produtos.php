@@ -1,7 +1,7 @@
 <div class="col-6">
 	<ul class="galeria-equipamento">
 		<li class="img-principal">
-			<?php $imagem = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'medium' ); ?>
+			<?php $imagem = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail' ); ?>
 			<?php $imagem2 = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), '' ); ?>
 			<a href="<?php echo $imagem2[0]; ?>" class="fancybox" data-fancybox="galeria"><img src="<?php echo $imagem[0]; ?>"><i class="fa fa-search" aria-hidden="true"></i></a>
 		</li>
@@ -71,11 +71,23 @@
 			</span>
 		</div>
 
+		<div class="det-tec-produto">
+			<?php if(get_field('codigo')){ ?>
+				<span class="item"><strong>Codigo do produto: </strong><?php the_field('codigo'); ?></span>
+			<?php } ?>
+
+			<?php if(get_field('embalagem')){ ?>
+				<span class="item"><strong>Embalagem: </strong><?php the_field('embalagem'); ?></span>
+			<?php } ?>
+		</div>
+
 		<?php the_excerpt(); ?>
-		<a href="<?php echo get_home_url(); ?>/minha-area" title="Solicitar Orçamento" class="btn orcamento">
+
+		<a href="javascript:" title="Solicitar Orçamento" class="btn pedido" id="add-orcamento" nome-prod="<?php the_title(); ?>" cod-prod="<?php the_field('codigo'); ?>">
 			<i class="fa fa-paper-plane" aria-hidden="true"></i>
 			Solicitar Orçamento
 		</a>
+
 	</div>	
 </div>
 
@@ -100,6 +112,26 @@
 		<div class="content-tab">
 			<div class="tab active" id="descricao">
 				<?php the_content(); ?>
+
+				<?php if(get_field('vantagens')){ ?>
+					<h3>Vantagens</h3>
+					<p><?php the_field('vantagens'); ?></p>
+				<?php } ?>
+
+				<?php if(get_field('aplicacoes')){ ?>
+					<h3>Aplicações</h3>
+					<p><?php the_field('aplicacoes'); ?></p>
+				<?php } ?>
+
+				<?php if(get_field('recomendacoes')){ ?>
+					<h3>Recomendação de Uso</h3>
+					<p><?php the_field('recomendacoes'); ?></p>
+				<?php } ?>
+
+				<?php if(get_field('composicao')){ ?>
+					<h3>Composição</h3>
+					<p><?php the_field('composicao'); ?></p>
+				<?php } ?>
 			</div>
 
 			<?php if( have_rows('avaliacao') ): ?>
@@ -137,8 +169,75 @@
 
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/js/fancybox/fancybox.js"></script>
 <script type="text/javascript">
+	var qtd_cart_orcamento = '<?php echo $qtd_cart_orcamento; ?>';
+
 	jQuery(document).ready(function() {		
-		jQuery('.fancybox').fancybox();	
+		jQuery('.fancybox').fancybox();
+
+		jQuery('#add-orcamento').click(function() { //alert();
+			jQuery('.msg-pedido').html('');
+
+			nome = '<?php the_title(); ?>';
+			codigo = '<?php the_field('codigo'); ?>';
+			id = '<?php echo $post->ID; ?>';
+			item = '';
+			<?php
+				if(isset($_SESSION['orcamento'])){
+					if(isset($_SESSION['orcamento']) > 0){
+
+						$qtd_cart_orcamento = 0;
+						foreach ($_SESSION['orcamento'] as $key => $value) {
+							$qtd_cart_orcamento = $qtd_cart_orcamento+$value['quantidade'];
+						}
+
+					}else{
+						$qtd_cart_orcamento = 0;
+					}
+				}else{
+					$qtd_cart_orcamento = 0;
+				}
+			?>
+
+			/*alert(nome);
+			alert(codigo);
+			alert(id);
+			alert(qtd_cart_orcamento);*/
+
+			jQuery.getJSON("<?php echo get_template_directory_uri(); ?>/add-orcamento.php", { id:id, nome:nome, codigo:codigo }, function(result){		
+				if(result=='ok'){
+					jQuery('#modal-orcamento .msg').html('Item adicionado com sucesso!');
+					item += '<tr id="item-'+id+'">';
+						item += '<td class="center">'+codigo+'</td>';
+						item += '<td><strong>'+nome+'</strong></td>';
+						item += '<td class="qtd" class="center"><input name="qtd'+id+'" placeholder="1" value="1" type="text"></td>';
+						item += '<td class="center"><a href="javascript:" class="remove-item" qtd-prod="1" id-prod="'+id+'"><i class="fa fa-times-circle" aria-hidden="true"></i></a></td>';
+					item += '</tr>';
+
+					qtd_cart_orcamento = parseInt(qtd_cart_orcamento)+parseInt(1);
+					jQuery('#add-linha-orcamento').append(item);
+					jQuery('#modal-orcamento').css('display','table');
+					jQuery('#qtd_cart_orcamento').html('<span>'+qtd_cart_orcamento+'</span>');
+					jQuery('#qtd_orcamento').html(qtd_cart_orcamento);
+					jQuery('#qtd-0').hide();
+
+					//alert(qtd_cart_orcamento);
+
+					if(qtd_cart_orcamento > 0){
+						jQuery('#enviar-orcamento').removeClass('off');
+						jQuery('.dados-cliente').show();
+					}
+				}else{
+					if(result=='ja-existe'){
+						jQuery('#modal-erro .msg').html('Este item já foi adicionado à lsita de orçamentos!');
+						jQuery('#modal-erro').css('display','table');
+					}else{
+						jQuery('#modal-erro .msg').html('Não foi possível adicionar esse item!');
+						jQuery('#modal-erro').css('display','table');
+					}
+				}
+			});
+		});
+
 	});
 </script>
 

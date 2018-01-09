@@ -153,11 +153,32 @@
 				<div class="col-3 contato-footer">
 					<h3>FALE CONOSCO</h3>
 
-					<span class="tel">+55 (49) 3674.0000</span>
-					<span class="email">comercial@styroville.com.br</span>
+					<?php if(get_field('telefone','option')){ ?>
+						<span class="tel">
+							<?php the_field('telefone','option');
+							if(get_field('info_telefone','option')){ ?>
+								<span class="footer-info"><?php the_field('info_telefone','option'); ?></span>
+							<?php } ?>
+						</span>
+					<?php } ?>
 
-					<h4>Horário de Atendimento</h4>
-					<p>08:00 as 12:00 - 13:30 as 18:00</p>
+					<?php if(get_field('celular','option')){ ?>
+						<span class="tel">
+							<?php the_field('celular','option');
+							if(get_field('info_celular','option')){ ?>
+								<span class="footer-info"><?php the_field('info_celular','option'); ?></span>
+							<?php } ?>
+						</span>
+					<?php } ?>
+
+					<?php if(get_field('email','option')){ ?>
+						<span class="email"><?php the_field('email','option'); ?></span>
+					<?php } ?>
+
+					<?php if(get_field('horario_atendimento','option')){ ?>
+						<h4>Horário de Atendimento</h4>
+						<p><?php the_field('horario_atendimento','option'); ?></p>
+					<?php } ?>
 		
 				</div>
 			</div>
@@ -177,9 +198,103 @@
 		</div>
 	</footer>
 
+	<div class="bg-modal" id="modal-erro">
+		<div class="box-modal">
+			<div class="modal-conteudo">
+
+				<i class="fa fa-times close-modal" aria-hidden="true"></i>
+				<h2>Desculpe!</h2>
+				<p class="msg center"></p>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="bg-modal" id="modal-orcamento">
+		<div class="box-modal">
+			<div class="modal-conteudo">
+
+				<i class="fa fa-times close-modal" aria-hidden="true"></i>
+				<h2>Lista de Produtos para Orçamento</h2>
+				<p class="msg center"></p>
+
+				<div class="content-modal">					
+					<table id="confirmar-orcamento">
+						<thead>
+							<tr>
+								<th width="120" class="center">Código</th>
+								<th>Produto</th>
+								<th width="80" class="center">Qtd.</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody id="add-linha-orcamento">
+
+							<?php
+								if(isset($_SESSION['orcamento'])){
+									if(isset($_SESSION['orcamento']) > 0){
+
+										$qtd_cart_orcamento = 0;
+										foreach ($_SESSION['orcamento'] as $key => $value) { 
+											$qtd_cart_orcamento = $qtd_cart_orcamento+$value['quantidade']; ?>
+
+											<tr id="item-<?php echo $value['id']; ?>">
+												<td class="center"><?php echo $value['codigo']; ?></td>
+												<td><strong><?php echo $value['nome']; ?></strong></td>
+												<td class="qtd" class="center"><input name="qtd<?php echo $value['id']; ?>" placeholder="1" value="<?php echo $value['quantidade']; ?>" type="text"></td>
+												<td class="center"><a href="javascript:" class="remove-item" qtd-prod="<?php echo $value['quantidade']; ?>" id-prod="<?php echo $value['id']; ?>"><i class="fa fa-times-circle" aria-hidden="true"></i></a></td>
+											</tr>
+
+										<?php }
+
+										if($qtd_cart_orcamento == 0){
+											echo '<tr id="qtd-0" class="fixo"><td colspan="4">Nenhum produto adicionado.</td></tr>';
+										}else{
+											echo '<tr id="qtd-0" class="fixo" style="display: none;"><td colspan="4">Nenhum produto adicionado.</td></tr>';
+										}
+
+									}else{
+										echo '<tr id="qtd-0" class="fixo"><td colspan="4">Nenhum produto adicionado.</td></tr>';
+									}
+								}else{
+									echo '<tr id="qtd-0" class="fixo"><td colspan="4">Nenhum produto adicionado.</td></tr>';
+								}
+							?>
+
+						</tbody>
+						<tfoot>
+							<tr>
+								<th></th>
+								<th class="right">TOTAL DE PRODUTOS: </th>
+								<th class="center" id="qtd_orcamento"><?php echo $qtd_cart_orcamento; ?></th>
+								<th></th>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+
+				<div class="dados-cliente row" style="<?php if($qtd_cart_orcamento == 0){ echo 'display: none;'; } ?>">
+					<fieldset class="col-6">
+						<input type="text" name="nome-orcamento" id="nome-orcamento" placeholder="Nome">
+					</fieldset>
+
+					<fieldset class="col-6">
+						<input type="text" name="email-orcamento" id="email-orcamento" placeholder="E-mail">
+					</fieldset>
+				</div>
+
+				<a href="javascript:" title="Solicitar Orçamento" id="enviar-orcamento" class="btn orcamento <?php if($qtd_cart_orcamento == 0){ echo 'off'; } ?>">
+					<i class="fa fa-shopping-cart" aria-hidden="true"></i> Enviar Orçamento
+				</a>
+			</div>
+		</div>
+	</div>
+
 	<script type="text/javascript">
 		
 		jQuery.noConflict();
+
+		var qtd_cart_orcamento = '<?php echo $qtd_cart_orcamento; ?>';
 
 		jQuery(document).ready(function(){
 			jQuery(".scroll").click(function(event){
@@ -195,37 +310,15 @@
 				jQuery('html,body').animate( { scrollTop: 0 } , 1000);
 			});
 
-
-			// FORM
-			/*
-			jQuery(".enviar").click(function(){
-				jQuery('.enviar').html('ENVIANDO').prop( "disabled", true );
-				jQuery('.msg-form').removeClass('erro ok').html('');
-				var nome = jQuery('#nome').val();
-				var email = jQuery('#email').val();
-				var mensagem = jQuery('#mensagem').val();
-				var para = '<?php get_field('email', 'option'); ?>';
-				var nome_site = '<?php get_field('titulo', 'option'); ?>';
-
-				if(email!=''){
-					jQuery.getJSON("<?php echo get_template_directory_uri(); ?>/mail.php", { nome:nome, email:email, mensagem:mensagem, para:para, nome_site:nome_site }, function(result){		
-						if(result=='ok'){
-							resultado = 'Enviado com sucesso! Obrigado.';
-							classe = 'ok';
-						}else{
-							resultado = result;
-							classe = 'erro';
-						}
-						jQuery('.msg-form').addClass(classe).html(resultado);
-						jQuery('form').trigger("reset");
-						jQuery('.enviar').html('ENVIAR').prop( "disabled", false );
-					});
-				}else{
-					jQuery('.msg-form').addClass('erro').html('Por favor, digite um e-mail válido.');
-					jQuery('.enviar').html('ENVIAR').prop( "disabled", false );
-				}
+			jQuery('.close-modal').click(function(){
+				jQuery(this).parents('.bg-modal').hide();
+				jQuery('.msg').html('');
 			});
-			*/
+
+			jQuery('.cart-orcamento').click(function(){
+				jQuery('.bg-modal').css('display','none');
+				jQuery('#modal-orcamento').css('display','table');
+			});
 		});
 
 		
@@ -238,21 +331,84 @@
 				window.location.href = '<?php echo get_home_url(); ?>/minha-area'; 
 			});
 
-			/*jQuery.ajax("", { }, function(){
-				alert();
-				window.location.href = '<?php echo get_home_url(); ?>/minha-area'; 
-			});*/
 		};
+
+			jQuery(document).on('click', '.remove-item', function(){
+				id = jQuery(this).attr('id-prod');
+				qtd_prod = jQuery(this).attr('qtd-prod');
+
+				jQuery.getJSON("<?php echo get_template_directory_uri(); ?>/remove-orcamento.php", { id:id }, function(result){		
+					if(result=='ok'){
+						jQuery('#modal-orcamento .msg').html('Item removido com sucesso!');
+						qtd_cart_orcamento = qtd_cart_orcamento-parseInt(qtd_prod);
+						jQuery('#item-'+id).remove();
+						jQuery('#qtd_orcamento').html(qtd_cart_orcamento);
+						if(qtd_cart_orcamento == 0) {
+							jQuery('#qtd_cart_orcamento').html('');
+							jQuery('#qtd-0').show();
+							jQuery('#enviar-orcamento').addClass('off');
+							jQuery('.dados-cliente').hide();
+						}else{							
+							jQuery('#qtd_cart_orcamento').html('<span>'+qtd_cart_orcamento+'</span>');
+						}
+					}else{
+						jQuery('#modal-orcamento .msg').html('Não foi possível remover esse item!');
+					}
+
+				});
+			});
+
+		jQuery('#enviar-orcamento').click(function(){
+			nome_cliente = jQuery('#nome-orcamento').val();
+			email_cliente = jQuery('#email-orcamento').val();
+
+			envia_orcamento = true;
+			if(nome_cliente == ''){
+				jQuery('#nome-orcamento').parent().addClass('erro');
+				envia_orcamento = false;
+			}
+
+			if(email_cliente == ''){
+				jQuery('#email-orcamento').parent().addClass('erro');
+				envia_orcamento = false;
+			}
+
+			para = '<?php the_field('email', 'option'); ?>';
+			nome_site = '<?php the_field('titulo', 'option'); ?>';
+			//produtos = JSON.stringify(produtos);
+
+			///console.log(produtos);
+			//console.log(JSON.stringify(produtos));
+
+			//url = '<?php echo get_home_url(); ?>/?produtos=' + produtos;
+			//window.location.replace(url);
+
+			if(envia_orcamento){
+				jQuery.getJSON("<?php echo get_template_directory_uri(); ?>/orcamento.php", { nome_cliente:nome_cliente, email_cliente:email_cliente, para:para, nome_site:nome_site }, function(result){		
+					if(result=='ok'){
+						jQuery('#modal-orcamento .msg').html('Orçamento enviado com sucesso!');
+
+						jQuery('#add-linha-orcamento tr').each(function(){
+							if(!(jQuery(this).hasClass('fixo'))){
+								jQuery(this).remove();
+							}
+						});
+
+								jQuery('#qtd_cart_orcamento').html('');
+								jQuery('#qtd_orcamento').html('0');
+								jQuery('#qtd-0').show();
+								jQuery('#enviar-orcamento').addClass('off');
+								jQuery('.dados-cliente').hide();
+
+					}else{
+						jQuery('#modal-orcamento .msg').html('Desculpe, não foi possível enviar o seu orçamento. Por favor, tente mais tarde.');
+					}
+				});
+			}
+
+		});
 
 	</script>
 
 </body>
 </html>
-
-<?php
-	/*if(isset($_SESSION['id'])){
-		echo $_SESSION['id'];
-		echo '<br>'.$_SESSION['usuario'];
-		echo '<br>'.$_SESSION['senha'];
-	}*/
-?>

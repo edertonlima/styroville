@@ -62,6 +62,64 @@
 							</div>
 						<?php endif;
 					} ?>
+
+					<?php if(is_page('imprensa')){
+						if( have_rows('download') ): ?>
+							<ul class="content-txt nossa-equipe download">
+							<?php while ( have_rows('download') ) : the_row(); ?>
+								<li class="col-12">
+									<?php if(get_sub_field('imagem')){ ?>
+										<img src="<?php the_sub_field('imagem'); ?>" alt="<?php the_sub_field('titulo'); ?>" class="col-4">
+									<?php } ?>
+									<div class="col-8">
+										<h4><?php the_sub_field('titulo'); ?></h4>
+										<?php if(get_sub_field('descricao')){ ?>
+											<p><?php the_sub_field('descricao'); ?></p>
+										<?php } ?>
+										<a href="<?php the_sub_field('arquivo'); ?>" title="Download" class="mais-item" target="_blank">
+											<i class="fa fa-caret-right" aria-hidden="true"></i> Download
+										</a>
+									</div>
+								</li>
+							<?php endwhile; ?>
+							</ul>
+						<?php endif;
+					} ?>
+
+					<?php /*if(is_page('area-de-atuacao')){ ?>
+
+						<ul id="map">
+
+							<li class="rs" estado="rs"><a class="" id="rs" title="RS"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="RS" /></a></li>
+							<li class="sc" estado="sc"><a class="" id="sc" title="SC"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="SC" /></a></li>
+							<li class="pr" estado="pr"><a class="" id="pr" title="PR"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="PR" /></a></li>
+							<li class="sp" estado="sp"><a class="" id="sp" title="SP"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="SP" /></a></li>
+							<li class="ms" estado="ms"><a class="" id="ms" title="MS"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="MS" /></a></li>
+							<li class="rj" estado="rj"><a class="" id="rj" title="RJ"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="RJ" /></a></li>
+							<li class="es" estado="es"><a class="" id="es" title="ES"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="ES" /></a></li>
+							<li class="mg" estado="mg"><a id="mg" title="MG"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="MG" /></a></li>
+							<li class="go" estado="go"><a id="go" title="GO"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="GO" /></a></li>
+							<li class="df" estado="df"><a id="df" title="DF"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="DF" /></a></li>
+							<li class="ba" estado="ba"><a id="ba" title="BA"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="BA" /></a></li>
+							<li class="mt" estado="mt"><a class="" id="mt" title="MT"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="MT" /></a></li>
+							<li class="ro" estado="ro"><a id="ro" title="RO"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="RO" /></a></li>
+							<li class="ac" estado="ac"><a id="ac" title="AC"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="AC" /></a></li>
+							<li class="am" estado="am"><a id="am" title="AM"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="AM" /></a></li>
+							<li class="rr" estado="rr"><a id="rr" title="RR"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="RR" /></a></li>
+							<li class="pa" estado="pa"><a id="pa" title="PA"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="PA" /></a></li>
+							<li class="ap" estado="ap"><a id="ap" title="AP"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="AP" /></a></li>
+							<li class="ma" estado="ma"><a id="ma" title="MA"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="MA" /></a></li>
+							<li class="to" estado="to"><a id="to" title="TO"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="TO" /></a></li>
+							<li class="se" estado="se"><a id="se" title="SE"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="SE" /></a></li>
+							<li class="al" estado="al"><a id="al" title="AL"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="AL" /></a></li>
+							<li class="pe" estado="pe"><a id="pe" title="PE"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="PE" /></a></li>
+							<li class="pb" estado="pb"><a id="pb" title="PB"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="PB" /></a></li>
+							<li class="rn" estado="rn"><a id="rn" title="RN"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="RN" /></a></li>
+							<li class="ce" estado="ce"><a id="ce" title="CE"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="CE" /></a></li>
+							<li class="pi" estado="pi"><a id="pi" title="PI"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/null.gif" alt="PI" /></a></li>
+						</ul>
+
+					<?php } */?>
 					
 				</div>
 

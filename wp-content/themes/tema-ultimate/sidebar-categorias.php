@@ -14,8 +14,8 @@
 		$categories = get_categories( $args );
 		foreach ( $categories as $categoria ){ ?>
 
-			<li class="<?php if($categoria->term_id == $terms[0]->term_id){ echo 'active'; } ?>">
-				<a href="<?php echo get_category_link($categoria->term_id); ?>" title="<?php echo $categoria->name; ?>">
+			<li class="<?php if($categoria->term_id == $categoria_id){ echo 'active'; } ?>">
+				<a href="<?php echo get_term_link($categoria->term_id); ?>" title="<?php echo $categoria->name; ?>">
 					<i class="fa fa-caret-right" aria-hidden="true"></i> <?php echo $categoria->name; ?>
 				</a>
 			</li>

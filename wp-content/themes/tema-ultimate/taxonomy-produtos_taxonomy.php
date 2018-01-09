@@ -1,6 +1,7 @@
 <?php get_header(); ?>
 
-	<?php $terms = wp_get_post_terms( $post->ID, $post->post_type.'_taxonomy' ); //var_dump($terms); ?>
+	<?php //$terms = wp_get_post_terms( $post->ID, $post->post_type.'_taxonomy' ); //var_dump($terms); ?>
+	<?php $categoria_id = get_queried_object()->term_id; //var_dump($term); ?>
 	<?php $post_type = get_post_type_object( $post->post_type ); ?>
 
 	<?php //$taxonomy = get_queried_object(); var_dump($taxonomy) ?>
@@ -32,16 +33,22 @@
 				</div>
 
 				<div class="col-9">
+					<?php if(have_posts()){ ?>
 					<div class="row">
 						<?php
+							
 							while ( have_posts() ) : the_post(); 
 								
 								get_template_part( 'content-produtos-list', 'post' );
 
 							endwhile;
 							wp_reset_query();
+							
 						?>
 					</div>
+					<?php }else{ ?>
+						<h3><p>Nenhum produto encontrado.</p></h3>
+					<?php } ?>
 				</div>
 
 				<div class="col-3 sidebar">

@@ -56,7 +56,7 @@
 <meta http-equiv="content-language" content="pt" />
 <meta name="rating" content="General" />
 <meta name="description" content="<?php echo $descricao; ?>" />
-<meta name="keywords" content="" />
+<meta name="keywords" content="<?php the_field('palavras_chave', 'option'); ?>" />
 <meta name="robots" content="index,follow" />
 <meta name="author" content="<?php echo $autor; ?>" />
 <meta name="language" content="pt-br" />
@@ -94,6 +94,10 @@
 <link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/assets/css/style.css" media="screen" />
 <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/owl.carousel.min.css" type="text/css" media="screen" />
 
+<?php /*if(is_single('minha-area')){ ?>
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/jquery.dataTables.min.css" type="text/css" media="screen" />
+<?php } */?>
+
 <!-- JQUERY -->
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/js/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/js/bootstrap.min.js"></script>
@@ -125,7 +129,7 @@
 	});	
 
 	jQuery(window).load(function(){
-		if(((jQuery('body').height())+100) < jQuery(window).height()){
+		if(((jQuery('body').height())+400) < jQuery(window).height()){
 			jQuery('.footer').css({position: 'absolute', bottom: '0px'});
 		}else{
 			jQuery('.footer').css({position: 'relative'});
@@ -144,7 +148,7 @@
 			jQuery('.nav').css('top','auto');
 		}
 
-		if(((jQuery('body').height())+100) < jQuery(window).height()){
+		if(((jQuery('body').height())+400) < jQuery(window).height()){
 			jQuery('.footer').css({position: 'absolute', bottom: '0px'});
 		}else{
 			jQuery('.footer').css({position: 'relative'});
@@ -163,6 +167,19 @@
 
 </head>
 <body <?php body_class(); ?>>
+
+	<?php if(get_field('analytics', 'option')){ ?> }
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			//ga('create', 'UA-100022583-1', 'auto');
+			ga('create', '<?php the_field('analytics', 'option'); ?>', 'auto');
+			ga('send', 'pageview');
+		</script>
+	<?php } ?>
 
 	<header class="header">
 		<div class="container">
@@ -183,6 +200,31 @@
 
 					<li class="menu-produtos">
 						<a href="<?php echo get_home_url(); ?>/produtos" title="PRODUTOS">PRODUTOS</a>
+
+						<ul class="submenu">
+							<?php
+								$args = array(
+								    'taxonomy'      => 'produtos_taxonomy',
+								    'parent'        => 0,
+								    'orderby'       => 'name',
+								    'order'         => 'ASC',
+								    'hierarchical'  => 1,
+								    'pad_counts'    => true,
+								    'hide_empty'    => 0
+								);
+								$categories = get_categories( $args );
+								foreach ( $categories as $categoria ){ ?>
+
+									<li class="<?php if($categoria->term_id == $categoria_id){ echo 'active'; } ?>">
+										<a href="<?php echo get_term_link($categoria->term_id); ?>" title="<?php echo $categoria->name; ?>">
+											<?php echo $categoria->name; ?>
+										</a>
+									</li>
+
+									<?php
+								}
+							?>
+						</ul>
 					</li>
 
 					<li class="menu-qualidade">
@@ -222,5 +264,30 @@
 					<button type="submit">OK</button>
 				</fieldset>
 			</form>
+
+			<a href="javascript:" class="cart-orcamento">
+				<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+				<div id="qtd_cart_orcamento">
+					<?php
+						if(isset($_SESSION['orcamento'])){
+							if(isset($_SESSION['orcamento']) > 0){
+								$qtd_cart_orcamento = 0;
+								foreach ($_SESSION['orcamento'] as $key => $value) {
+									$qtd_cart_orcamento = $qtd_cart_orcamento+$value['quantidade'];
+								}
+
+								if($qtd_cart_orcamento){
+									echo '<span>'.$qtd_cart_orcamento.'</span>';
+								}
+							}
+						}
+					?>
+				</div>
+			</a>
 		</dib>
 	</header>
+
+<?php
+/*	session_start();
+	unset($_SESSION['orcamento']);
+*/?>
