@@ -64,22 +64,22 @@
 					} ?>
 
 					<?php if(is_page('imprensa')){
-						if( have_rows('download') ): ?>
+						if( have_rows('imprensa') ): ?>
 							<ul class="content-txt nossa-equipe download">
-							<?php while ( have_rows('download') ) : the_row(); ?>
+							<?php while ( have_rows('imprensa') ) : the_row(); ?>
 								<li class="col-12">
-									<?php if(get_sub_field('imagem')){ ?>
-										<img src="<?php the_sub_field('imagem'); ?>" alt="<?php the_sub_field('titulo'); ?>" class="col-4">
-									<?php } ?>
-									<div class="col-8">
-										<h4><?php the_sub_field('titulo'); ?></h4>
+									<?php /*if(get_sub_field('imagem')){ ?>
+										<img src="<?php the_sub_field('imagem'); ?>" alt="<?php the_sub_field('nome'); ?>" class="col-4">
+									<?php } */ ?>
+									<!--<div class="col-8">-->
+										<h4><?php the_sub_field('nome'); ?></h4>
 										<?php if(get_sub_field('descricao')){ ?>
 											<p><?php the_sub_field('descricao'); ?></p>
 										<?php } ?>
 										<a href="<?php the_sub_field('arquivo'); ?>" title="Download" class="mais-item" target="_blank">
 											<i class="fa fa-caret-right" aria-hidden="true"></i> Download
 										</a>
-									</div>
+									<!--</div>-->
 								</li>
 							<?php endwhile; ?>
 							</ul>

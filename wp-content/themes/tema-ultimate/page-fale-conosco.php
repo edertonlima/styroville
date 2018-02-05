@@ -59,7 +59,9 @@
 							<div class="content-txt nossa-equipe">
 							<?php while ( have_rows('nossa_equipe') ) : the_row(); ?>
 								<li class="col-4">
-									<img src="<?php the_sub_field('imagem'); ?>" alt="<?php the_sub_field('nome'); ?>">
+									<?php if(get_sub_field('imagem')){ ?>
+										<img src="<?php the_sub_field('imagem'); ?>" alt="<?php the_sub_field('nome'); ?>">
+									<?php } ?>
 									<h4><?php the_sub_field('nome'); ?></h4>
 								</li>
 							<?php endwhile; ?>

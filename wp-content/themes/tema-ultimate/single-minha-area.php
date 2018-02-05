@@ -102,13 +102,18 @@
 					<h3>Bem vindo, <strong><?php the_title(); ?></strong></h3>
 
 					<div class="pesquisa" style="width: 100%; float: left; clear: both; margin-top: 24px;">
-						<label class="" rel="table-categorias" style="line-height: 48px; float: left; text-align: right;">Categoria: </label>
+						<label class="" rel="table-categorias" style="line-height: 48px; float: left; text-align: right; display: none;">Categoria: </label>
 						<select name="table-categoria" id="table-categoria" style="float: left; width: 200px; font-size: 14px; margin: 0 0 0 15px; margin-right: 0px; border: 1px solid #3f3f40; border-radius: 5px; line-height: 50px; height: 50px; height: 50px; padding: 0 10px; margin-right: 30px;">
 							<option value="">Todas as categorias</option>
 						</select>
 
-						<label class="" rel="table-pesquisa" style="line-height: 48px; float: left; text-align: right;">Pesquisar: </label>
+						<label class="" rel="table-pesquisa" style="line-height: 48px; float: left; text-align: right; display: none;">Pesquisar: </label>
 						<input type="text" class="" name="table-pesquisa" id="table-pesquisa" onkeyup="filtro_produtos()" placeholder="Digite um nome.." style="width: 200px; font-size: 14px; margin: 0 0 0 15px;">
+
+						<div class="display-prod">
+							<i class="fa fa-bars active" aria-hidden="true"></i>
+							<i class="fa fa-th grid" aria-hidden="true"></i>
+						</div>
 					</div>
 
 					<div class="table-responsive" style="display: block; clear: both;">
@@ -172,7 +177,7 @@
 														</div>
 													</td>
 													<td width="80">
-														<label for="<?php echo $post->ID; ?>">
+														<label for="<?php echo $post->ID; ?>" class="img-prod-grid">
 															<img src="<?php echo $imagem[0]; ?>" alt="<?php the_title(); ?>">
 														</label>
 													</td>
@@ -182,7 +187,10 @@
 														</label>
 													</td>
 													<td class="preco" width="120">
-														<?php echo 'R$ '.formata_moeda($preco); ?>
+														<span class="txt-preco-ajust"><?php echo 'R$ '.formata_moeda($preco); ?></span>
+														
+														<span class="info-preco"><?php the_field('unidade_medida'); ?></span>
+
 														<?php /* if( have_rows('precos') ){
 
 															$preco = false;
@@ -202,7 +210,7 @@
 															echo '<span class="preco_off">Preço não<br>disponível</span>';
 														} */?>
 													</td>
-													<td class="qtd" width="130">
+													<td class="qtd" width="135">
 														<h4 class="qtd">QTD:</h4>
 														<input type="text" name="qtd<?php echo $post->ID; ?>" placeholder="1" value="1">
 													</td>
@@ -767,7 +775,23 @@ function filtro_produtos() {
 	});
 </script>
 
-<script type="text/javascript">/*
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	jQuery('.display-prod i').click(function(){
+		if(!jQuery(this).hasClass('active')){
+			jQuery('.display-prod i').removeClass('active');
+			jQuery(this).addClass('active');
+			if(jQuery(this).hasClass('grid')){
+				jQuery('#table-produtos').addClass('grid');
+			}else{
+				jQuery('#table-produtos').removeClass('grid');
+			}
+		}
+	});
+});
+
+
+/*
 	jQuery.noConflict();
 	jQuery(document).ready(function(){
 		/*jQuery('td', 'table').each(function(i) {

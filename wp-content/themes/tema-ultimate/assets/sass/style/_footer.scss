@@ -118,6 +118,16 @@
 			}
 		}
 	}
+
+	.contato-footer {
+		span {
+			&.tel {
+				i {
+					color: #ffffff;
+				}
+			}
+		}
+	}
 }
 
 .contato-footer {
@@ -127,7 +137,11 @@
 		display: block;
 
 		&.tel {
-			font-size: 1.3rem;
+			font-size: 1rem;
+
+			i {
+				font-size: 1rem;
+			}
 		}
 	}
 

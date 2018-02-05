@@ -89,7 +89,6 @@
 
 	td {
 		vertical-align: middle!important;
-		line-height: 80px!important;
 
 		img {
 			width: 100%;
@@ -142,6 +141,46 @@
 				color: $vermelho;
 				line-height: 15px;
 				display: block;
+			}
+
+			.txt-preco-ajust {
+				display: block;
+				vertical-align: middle;
+				line-height: normal;
+			}
+
+			.info-preco {
+				display: block;
+				font-size: .625rem;
+				line-height: .625rem;
+				vertical-align: middle;
+				margin-top: 5px;
+				height: 22px;
+				overflow: hidden;
+			}
+		}
+	}
+}
+
+.pesquisa {
+	.display-prod {
+		float: right;
+		margin-top: 12px;
+
+		i {
+			display: inline-block;
+			color: $cinza;
+			font-size: 27px;
+			margin-left: 5px;
+			cursor: pointer;
+
+			&.fa-th {
+				top: 1px;
+				position: relative;
+			}
+
+			&.active {
+				color: #000;
 			}
 		}
 	}

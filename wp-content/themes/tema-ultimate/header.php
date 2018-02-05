@@ -7,6 +7,15 @@
 <?php 
 	$titulo_princ = get_field('titulo', 'option');
 	$descricao_princ = get_field('descricao', 'option');
+	
+	$keywords = get_field('palavras_chave', 'option');
+	if(get_field('keywords')){
+		$keywords = $keywords.', '.get_field('keywords');
+	}
+
+	$titulo = get_the_title();
+	$descricao = get_the_excerpt();
+	
 	$imagem_princ = get_field('imagem_principal', 'option');
 	$url = get_home_url();
 	$imgPage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), '' );
@@ -36,7 +45,7 @@
 		$url = get_the_permalink();
 	}
 
-	if($titulo == ''){
+	if(($titulo == '') or ($titulo == 'Home')){
 		$titulo = $titulo_princ;
 	}else{
 		$titulo = $titulo.' - '.$titulo_princ;
@@ -46,7 +55,7 @@
 		$descricao = $descricao_princ;
 	}
 
-	$autor = '';
+	$autor = 'ULTIMATE! tecnologia e design, atendimento@ultimate.com.br';
 ?>
 
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -56,7 +65,7 @@
 <meta http-equiv="content-language" content="pt" />
 <meta name="rating" content="General" />
 <meta name="description" content="<?php echo $descricao; ?>" />
-<meta name="keywords" content="<?php the_field('palavras_chave', 'option'); ?>" />
+<meta name="keywords" content="<?php echo $keywords; ?>" />
 <meta name="robots" content="index,follow" />
 <meta name="author" content="<?php echo $autor; ?>" />
 <meta name="language" content="pt-br" />
@@ -165,21 +174,30 @@
 	});
 </script>
 
+<!-- CHAT -->
+<?php 
+	if(get_field('chat', 'option')){
+		the_field('chat', 'option');
+	}
+?>
+<!-- CHAT -->
+
 </head>
 <body <?php body_class(); ?>>
 
-	<?php if(get_field('analytics', 'option')){ ?> }
+	<!-- ANALYTICS -->
+	<?php if(get_field('analytics', 'option')){ ?>
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-			//ga('create', 'UA-100022583-1', 'auto');
 			ga('create', '<?php the_field('analytics', 'option'); ?>', 'auto');
 			ga('send', 'pageview');
 		</script>
 	<?php } ?>
+	<!-- ANALYTICS -->
 
 	<header class="header">
 		<div class="container">

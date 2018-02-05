@@ -356,6 +356,67 @@ table {
 			}
 		}
 	}
+
+	&#table-produtos {
+		tr {
+			td {
+				&.qtd {
+					input {
+						width: 55px;
+					}
+				}
+			}
+		}
+
+		&.grid {
+			tr {
+				width: 31%;
+				display: block;
+				float: left;
+				border: 1px solid #eaeaea;
+				margin: 0 1% 30px;
+				@include box-sizing;
+				@include animacao;
+
+				&:hover {
+					border-color: #000;
+				}
+
+				td {
+					width: 100%;
+					display: block;
+					border: none;
+					line-height: normal !important;
+					text-align: center;
+
+					.img-prod-grid {
+						height: 135px;
+						overflow: hidden;
+
+						img {
+							height: 135px;
+							max-width: 100%;
+						}
+					}
+
+					h4:not(.qtd) {
+						text-align: center;
+						height: 40px;
+						overflow: hidden;
+					}
+
+					.input-checkbox, label {
+						height: auto;
+						line-height: normal;
+
+						label {
+							padding-top: 10px;
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 .paginacao {

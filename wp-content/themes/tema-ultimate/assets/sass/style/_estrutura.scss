@@ -41,6 +41,7 @@ body * {
 		&.nossa-equipe {
 			li {
 				margin-top: 20px;
+				margin-bottom: 20px;
 				text-align: center;
 
 				h4 {
@@ -52,7 +53,24 @@ body * {
 					display: block;
 				}
 			}
-		} 
+		}
+
+		&.download {
+			li {
+				text-align: left;
+				border-bottom: 1px solid $cinza;
+				padding-bottom: 10px;
+
+				h4 {
+					text-align: left;
+					padding: 0;
+				}
+
+				a.mais-item {
+					float: left;
+				}
+			}
+		}
 
 		.img-page {
 			padding-left: 0;

@@ -112,12 +112,16 @@
 							)
 						);
 
-						while ( have_posts() ) : the_post(); ?>
-							<li>
-								<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">- <?php the_title(); ?></a>
-							</li>
-						<?php endwhile;
-						wp_reset_query(); ?>
+						if(have_posts()){
+							while ( have_posts() ) : the_post(); ?>
+								<li>
+									<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>">- <?php the_title(); ?></a>
+								</li>
+							<?php endwhile;
+							wp_reset_query(); 
+						}else{ ?>
+							<p style="color: #fff;">Nenhuma notícia encontrada.</p>
+						<?php } ?>
 					</ul>
 				</div>
 

@@ -12,13 +12,25 @@
 
 			<div class="col-8">
 				<div class="row">
-					<?php
-						while ( have_posts() ) : the_post(); 
-							
-							get_template_part( 'content-category', 'post' );
 
-						endwhile;
-						wp_reset_query();
+					<?php
+						if(have_posts()){
+							while ( have_posts() ) : the_post(); 
+								
+								get_template_part( 'content-category', 'post' );
+
+							endwhile;
+							wp_reset_query();
+						}else{ ?>
+
+							<div class="col-12">
+								<h4>
+									<br><br>
+									<p>Nenhuma noticia encontrada.</p>
+								</h4>
+							</div>
+
+						<?php }
 					?>
 				</div>
 			</div>
