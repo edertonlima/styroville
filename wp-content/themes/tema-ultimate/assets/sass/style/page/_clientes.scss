@@ -185,3 +185,34 @@
 		}
 	}
 }
+
+.btn-pedido-float {
+	margin-top: 50px;
+	font-size: .875rem;
+	@include animacao;
+
+	.msg-pedido {
+		font-weight: $bold;
+	}
+
+	.btn {
+		font-size: 1rem;
+		padding: 0;
+		width: 100%;
+		max-width: 260px;
+
+		&:hover {
+			border-color: $vermelho;
+		}
+	}
+
+	&.top-fixed {
+		position: fixed;
+		//top: 278px;
+		top: 0px;
+	}
+
+	&.top-fixed2 {
+		top: 0px;
+	}
+}

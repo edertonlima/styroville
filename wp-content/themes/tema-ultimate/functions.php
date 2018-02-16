@@ -10,11 +10,11 @@ if(wp_get_current_user()->ID == 1){
 
 add_action( 'pre_get_posts', 'custom_query_vars' );
 function custom_query_vars( $query ) {
-
+	if ( !is_admin() ) {
 	//if ( get_post_type() == 'produtos' ) {
 		$query->set( 'orderby' , 'title' );
 		$query->set( 'order' , 'ASC' );
-	//}
+	}
 
 	return $query;
 }
@@ -135,6 +135,12 @@ if( function_exists('acf_add_options_page') ) {
 	acf_add_options_sub_page(array(
 		'page_title' 	=> 'Configurações Gerais',
 		'menu_title'	=> 'Geral',
+		'parent_slug'	=> 'configuracoes-geral',
+	));
+
+	acf_add_options_sub_page(array(
+		'page_title' 	=> 'Filiais',
+		'menu_title'	=> 'Filiais',
 		'parent_slug'	=> 'configuracoes-geral',
 	));
 }

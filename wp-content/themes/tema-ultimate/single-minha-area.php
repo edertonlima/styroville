@@ -229,11 +229,6 @@
 
 					<?php if($produtoOK){ ?>
 
-						<p class="msg-pedido"></p>
-						<a href="javascript:" title="Solicitar Orçamento" id="confirmar-pedido" class="btn pedido">
-							<i class="fa fa-shopping-cart" aria-hidden="true"></i> Confirmar Pedido
-						</a>
-
 					<?php }else{ ?>
 
 						<p>Nenhum produto encontrado.</p>
@@ -365,6 +360,17 @@
 					</li>
 
 				</ul>
+
+				<div class="btn-pedido-float">
+					<?php if($produtoOK){ ?>
+
+						<p class="msg-pedido"></p>
+						<a href="javascript:" title="Solicitar Orçamento" id="confirmar-pedido" class="btn pedido">
+							<i class="fa fa-shopping-cart" aria-hidden="true"></i> Confirmar Pedido
+						</a>
+
+					<?php } ?>
+				</div>
 			</div>
 		</div>
 
@@ -394,6 +400,31 @@
 <?php get_footer(); ?>
 
 <script type="text/javascript">
+
+	jQuery(document).ready(function(){
+		jQuery('.btn-pedido-float').width(jQuery('.sidebar').width());
+		scroll_btn_pedido = jQuery(window).scrollTop();
+		if(scroll_btn_pedido > 278){
+			jQuery('.btn-pedido-float').addClass('top-fixed');
+		}else{
+			jQuery('.btn-pedido-float').removeClass('top-fixed');
+		}
+	});	
+
+	jQuery(window).resize(function(){
+		jQuery('.btn-pedido-float').width(jQuery('.sidebar').width());
+	});	
+
+
+	jQuery(window).scroll(function(){
+		scroll_btn_pedido = jQuery(window).scrollTop();
+		jQuery('.btn-pedido-float').attr('value',scroll_btn_pedido);
+		if(scroll_btn_pedido > 278){
+			jQuery('.btn-pedido-float').addClass('top-fixed');
+		}else{
+			jQuery('.btn-pedido-float').removeClass('top-fixed');
+		}
+	});
 
 function filtro_produtos() {
 	filter_categoria = jQuery('#table-categoria').val();

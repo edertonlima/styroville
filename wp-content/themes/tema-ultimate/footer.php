@@ -160,18 +160,18 @@
 					<?php if(get_field('telefone','option')){ ?>
 						<span class="tel">
 							<?php the_field('telefone','option');
-							if(get_field('info_telefone','option')){ ?>
+							/*if(get_field('info_telefone','option')){ ?>
 								<span class="footer-info"><?php the_field('info_telefone','option'); ?></span>
-							<?php } ?>
+							<?php } */?>
 						</span>
 					<?php } ?>
 
 					<?php if(get_field('celular','option')){ ?>
 						<span class="tel">
 							<?php the_field('celular','option');
-							if(get_field('info_celular','option')){ ?>
+							/*if(get_field('info_celular','option')){ ?>
 								<span class="footer-info"><?php the_field('info_celular','option'); ?></span>
-							<?php } ?>
+							<?php } */?>
 						</span>
 					<?php } ?>
 
@@ -183,6 +183,15 @@
 						<h4>Horário de Atendimento</h4>
 						<p><?php the_field('horario_atendimento','option'); ?></p>
 					<?php } ?>
+
+					<?php if( have_rows('filiais','option') ): ?>
+						<?php while ( have_rows('filiais','option') ) : the_row(); ?>
+							<div class="maps-filiais-footer">
+								<h4><?php the_sub_field('nome','option'); ?></h4>
+								<p><?php the_sub_field('endereco'); ?></p>
+							</div>
+						<?php endwhile; ?>
+					<?php endif;  ?>
 
 					<?php if( have_rows('redes_sociais','option') ): ?>
 						<div class="redes">						

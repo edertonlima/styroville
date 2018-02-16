@@ -27,18 +27,18 @@
 							<?php if(get_field('telefone','option')){ ?>
 								<span class="tel">
 									<?php the_field('telefone','option');
-									if(get_field('info_telefone','option')){ ?>
+									/*if(get_field('info_telefone','option')){ ?>
 										<span><?php the_field('info_telefone','option'); ?></span>
-									<?php } ?>
+									<?php } */?>
 								</span>
 							<?php } ?>
 
 							<?php if(get_field('celular','option')){ ?>
 								<span class="tel">
 									<?php the_field('celular','option');
-									if(get_field('info_celular','option')){ ?>
+									/*if(get_field('info_celular','option')){ ?>
 										<span><?php the_field('info_celular','option'); ?></span>
-									<?php } ?>
+									<?php }*/ ?>
 								</span>
 							<?php } ?>
 
@@ -54,6 +54,20 @@
 							<?php } ?>
 						</div>		
 					</div>
+
+					<?php if( have_rows('filiais','option') ): ?>
+						<?php while ( have_rows('filiais','option') ) : the_row(); ?>
+							<div class="maps-filiais row">
+								<h2><?php the_sub_field('nome','option'); ?></h2>
+								<div class="col-8">
+									<?php the_sub_field('mapa','option'); ?>
+								</div>
+								<div class="col-4">
+									<p><?php the_sub_field('endereco'); ?></p>
+								</div>
+							</div>
+						<?php endwhile; ?>
+					<?php endif;  ?>
 
 					<?php if( have_rows('nossa_equipe') ): ?>
 							<div class="content-txt nossa-equipe">
