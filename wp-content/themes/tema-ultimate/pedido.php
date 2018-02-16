@@ -21,9 +21,16 @@ var_dump($produtos);*/
 
 	$nome = $_GET['nome_cliente'];
 	$email = $_GET['email_cliente'];
+	$cpf = $_GET['cpf_cliente'];
+	$telefone = $_GET['telefone_cliente'];
+	$celular = $_GET['celular_cliente'];
+	$endereco = $_GET['endereco_cliente'];
+	$cep = $_GET['cep_cliente'];
+	$bairro = $_GET['bairro_cliente'];
+	$cidade = $_GET['cidade_cliente'];
 
 	$produtos_JSON = $_GET['produtos'];
-	$preco_total = $_GET['preco_total'];
+	$preco_pedido = $_GET['preco_pedido'];
 
 	$nome_site = $_GET['nome_site'];
 	$para = $_GET['para'];
@@ -40,17 +47,26 @@ var_dump($produtos);*/
 
 	$conteudo .= '<p>';
 		$conteudo .= '<strong>Nome:</strong> '.$nome;
+		$conteudo .= '<br><strong>CPF/CPNJ:</strong> '.$cpf;
 		$conteudo .= '<br><strong>E-mail:</strong> '.$email;
+		$conteudo .= '<br><strong>Telefone:</strong> '.$telefone;
+		$conteudo .= '<br><strong>Celular:</strong> '.$celular;
+		$conteudo .= '<br><strong>Endereço:</strong> '.$endereco;
+		$conteudo .= '<br><strong>Bairro:</strong> '.$bairro;
+		$conteudo .= '<br><strong>Cidade:</strong> '.$cidade;
+		$conteudo .= '<br><strong>CEP:</strong> '.$cep;
 	$conteudo .= '</p>';
 
-	$conteudo .= '<table width="600" id="confirmar-pedido" border="0" cellpadding="0" cellspacing="10">';
+	$conteudo .= '<table width="900" id="confirmar-pedido" border="0" cellpadding="0" cellspacing="10">';
 		$conteudo .= '<thead>';
 			$conteudo .= '<tr>';
 				$conteudo .= '<th width="120" align="center">Qtd.</th>';
 				$conteudo .= '<th align="left">Produto</th>';
+				$conteudo .= '<th width="50" align="left">Uni.</th>';
 				$conteudo .= '<th width="150" align="left">Preço</th>';
+				$conteudo .= '<th width="150" align="left">Total</th>';
 			$conteudo .= '</tr>';
-			$conteudo .= '<tr height="2" bgcolor="#3f3f40"><th colspan="3"></th></tr>';
+			$conteudo .= '<tr height="2" bgcolor="#3f3f40"><th colspan="5"></th></tr>';
 		$conteudo .= '</thead>';
 		$conteudo .= '<tbody>';
 
@@ -61,22 +77,24 @@ var_dump($produtos);*/
 				$conteudo .= '<tr>';
 					$conteudo .= '<td align="center">'.$produto->qtd.'</td>';
 					$conteudo .= '<td align="left"><strong>'.$produto->nome.'</strong></td>';
+					$conteudo .= '<td align="left">'.$produto->item_unidade.'</td>';
 					$conteudo .= '<td align="left">R$ '.$produto->preco.'</td>';
+					$conteudo .= '<td align="left"><b>R$ '.$produto->preco_total.'</b></td>';
 				$conteudo .= '</tr>';
 
 				if($key != (count($produtos)-1)){
-					$conteudo .= '<tr height="1" bgcolor="#ddd"><th colspan="3"></th></tr>';
+					$conteudo .= '<tr height="1" bgcolor="#ddd"><th colspan="5"></th></tr>';
 				}
 			}
 
 			
 		$conteudo .= '</tbody>';
 		$conteudo .= '<tfoot>';
-			$conteudo .= '<tr height="2" bgcolor="#3f3f40"><th colspan="3"></th></tr>';
+			$conteudo .= '<tr height="2" bgcolor="#3f3f40"><th colspan="5"></th></tr>';
 			$conteudo .= '<tr>';
 				$conteudo .= '<th></th>';
-				$conteudo .= '<th align="right">Total: </th>';
-				$conteudo .= '<th align="left">R$ '.$preco_total.'</th>';
+				$conteudo .= '<th colspan="3" align="right"><b>TOTAL DO PEDIDO:</b> </th>';
+				$conteudo .= '<th align="left"><b>R$ '.$preco_pedido.'</b></th>';
 			$conteudo .= '</tr>';
 		$conteudo .= '</tfoot>';
 	$conteudo .= '</table>';

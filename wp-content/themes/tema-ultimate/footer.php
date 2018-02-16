@@ -183,6 +183,16 @@
 						<h4>Horário de Atendimento</h4>
 						<p><?php the_field('horario_atendimento','option'); ?></p>
 					<?php } ?>
+
+					<?php if( have_rows('redes_sociais','option') ): ?>
+						<div class="redes">						
+							<?php while ( have_rows('redes_sociais','option') ) : the_row(); ?>
+								<a href="<?php the_sub_field('url','option'); ?>" title="<?php the_sub_field('nome','option'); ?>" target="_blank">
+									<?php the_sub_field('icone','option'); ?>
+								</a>
+							<?php endwhile; ?>
+						</div>
+					<?php endif; ?>
 		
 				</div>
 			</div>
@@ -278,12 +288,16 @@
 				</div>
 
 				<div class="dados-cliente row" style="<?php if($qtd_cart_orcamento == 0){ echo 'display: none;'; } ?>">
-					<fieldset class="col-6">
+					<fieldset class="col-4">
 						<input type="text" name="nome-orcamento" id="nome-orcamento" placeholder="Nome">
 					</fieldset>
 
-					<fieldset class="col-6">
+					<fieldset class="col-4">
 						<input type="text" name="email-orcamento" id="email-orcamento" placeholder="E-mail">
+					</fieldset>
+
+					<fieldset class="col-4">
+						<input type="text" class="mask-telefone" name="tel-orcamento" id="tel-orcamento" placeholder="Telefone">
 					</fieldset>
 				</div>
 
@@ -365,6 +379,7 @@
 		jQuery('#enviar-orcamento').click(function(){
 			nome_cliente = jQuery('#nome-orcamento').val();
 			email_cliente = jQuery('#email-orcamento').val();
+			tel_cliente = jQuery('#tel-orcamento').val();
 
 			envia_orcamento = true;
 			if(nome_cliente == ''){
@@ -374,6 +389,11 @@
 
 			if(email_cliente == ''){
 				jQuery('#email-orcamento').parent().addClass('erro');
+				envia_orcamento = false;
+			}
+
+			if(tel_cliente == ''){
+				jQuery('#tel-orcamento').parent().addClass('erro');
 				envia_orcamento = false;
 			}
 
@@ -388,9 +408,9 @@
 			//window.location.replace(url);
 
 			if(envia_orcamento){
-				jQuery.getJSON("<?php echo get_template_directory_uri(); ?>/orcamento.php", { nome_cliente:nome_cliente, email_cliente:email_cliente, para:para, nome_site:nome_site }, function(result){		
+				jQuery.getJSON("<?php echo get_template_directory_uri(); ?>/orcamento.php", { nome_cliente:nome_cliente, email_cliente:email_cliente, tel_cliente:tel_cliente, para:para, nome_site:nome_site }, function(result){		
 					if(result=='ok'){
-						jQuery('#modal-orcamento .msg').html('Orçamento enviado com sucesso!');
+						jQuery('#modal-orcamento .msg').html('Orçamento enviado com sucesso! <strong>Aguarde, logo entraremos em contato.</strong>');
 
 						jQuery('#add-linha-orcamento tr').each(function(){
 							if(!(jQuery(this).hasClass('fixo'))){
@@ -412,6 +432,13 @@
 
 		});
 
+	</script>
+
+	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/js/maskedinput.js"></script>
+	<script type="text/javascript">
+		jQuery(function(jQuery){
+		   jQuery(".mask-telefone").mask("(99) 9999-9999?9");
+		});
 	</script>
 
 </body>

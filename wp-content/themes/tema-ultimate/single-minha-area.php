@@ -14,7 +14,7 @@
 					$nome = $_POST['razao_social'];
 					$doc = $_POST['cnpj'];
 					$tipo = true;
-				}else{ echo 'tipo';
+				}else{
 					$nome = $_POST['nome'];
 					$doc = $_POST['cpf'];
 					$tipo = false;
@@ -110,10 +110,13 @@
 						<label class="" rel="table-pesquisa" style="line-height: 48px; float: left; text-align: right; display: none;">Pesquisar: </label>
 						<input type="text" class="" name="table-pesquisa" id="table-pesquisa" onkeyup="filtro_produtos()" placeholder="Digite um nome.." style="width: 200px; font-size: 14px; margin: 0 0 0 15px;">
 
+						<button type="button" class="print"><i class="fa fa-print" aria-hidden="true"></i></button>
+
 						<div class="display-prod">
 							<i class="fa fa-bars active" aria-hidden="true"></i>
 							<i class="fa fa-th grid" aria-hidden="true"></i>
 						</div>
+
 					</div>
 
 					<div class="table-responsive" style="display: block; clear: both;">
@@ -172,7 +175,7 @@
 													<td width="30">
 														<div class="input-checkbox center">
 															<label>
-																<input type="checkbox" name="<?php echo $post->ID; ?>" id="<?php echo $post->ID; ?>" item-nome="<?php the_title(); ?>" item-foto="" item-preco="<?php echo $preco; ?>" value="<?php echo $post->ID; ?>">
+																<input type="checkbox" name="<?php echo $post->ID; ?>" id="<?php echo $post->ID; ?>" item-nome="<?php the_title(); ?>" item-foto="" item-preco="<?php echo $preco; ?>" item-unidade="<?php the_field('unidade_medida'); ?>" value="<?php echo $post->ID; ?>">
 															</label>
 														</div>
 													</td>
@@ -245,7 +248,7 @@
 					<?php
 						while ( have_posts() ) : the_post(); ?>
 							
-							<form action="<?php the_permalink(); ?>" class="cadastro <?php if(get_field('tipo')){ echo 'pj'; }else{ echo 'pf'; } ?>" method="post">
+							<form action="<?php the_permalink(); ?>/#meus-dados" class="cadastro <?php if(get_field('tipo')){ echo 'pj'; }else{ echo 'pf'; } ?>" method="post">
 								<div class="row">
 
 									<label class="col-12 titulo">Dados Principais:</label>
@@ -446,11 +449,10 @@ function filtro_produtos() {
 						});
 					}
 				}
-
-
 }
 
 	jQuery(document).ready(function(){
+
 		<?php
 		//var_dump($term_prods);
 		//echo '<br><br>';
@@ -513,8 +515,14 @@ function filtro_produtos() {
 
 	var produtos = [];
 	var preco_total = 0;
+	var preco_pedido = 0;
 
 	jQuery('#confirmar-pedido').click(function() {
+
+		produtos = [];
+		preco_total = 0;
+		preco_pedido = 0;
+
 		jQuery('.msg-pedido').html('');
 		qtd_item = 0;
 		preco = 0;
@@ -523,7 +531,9 @@ function filtro_produtos() {
 				item += '<tr>';
 					item += '<th width="120" class="center">Qtd.</th>';
 					item += '<th>Produto</th>';
+					item += '<th width="50">Uni.</th>';
 					item += '<th width="150">Preço</th>';
+					item += '<th width="150">Total</th>';
 				item += '</tr>';
 			item += '</thead>';
 			item += '<tbody>';
@@ -534,25 +544,32 @@ function filtro_produtos() {
 				id = jQuery(this).val();
 				nome = jQuery(this).attr('item-nome');
 				preco = jQuery(this).attr('item-preco');
-				preco_total = parseFloat(preco_total)+parseFloat(preco);
-				qtd_produto = jQuery('input[name="qtd'+id+'"]').val();
+				item_unidade = jQuery(this).attr('item-unidade');
 
-				produtos.push({'id':id, 'nome':nome, 'preco':Number(preco).toFixed(2).replace('.', ','), 'qtd':qtd_produto});
+				qtd_produto = jQuery('input[name="qtd'+id+'"]').val();
+				preco_total = parseFloat(qtd_produto)*parseFloat(preco);
+				//alert('Preço total = '+preco_total+'  //  Preço atual do pedido = '+preco_pedido);
+				preco_pedido = parseFloat(preco_pedido) + parseFloat(preco_total);
+				//alert('Preço do pedido = '+preco_pedido);
+
+				produtos.push({'id':id, 'nome':nome, 'preco':Number(preco).toFixed(2).replace('.', ','), 'qtd':qtd_produto, 'preco_total':Number(preco_total).toFixed(2).replace('.', ','), 'item_unidade':item_unidade});
 
 				item += '<tr>';
 					item += '<td class="center">'+qtd_produto+'</td>';
 					item += '<td><strong>'+nome+'</strong></td>';
+					item += '<td>'+item_unidade+'</td>';
 					item += '<td>R$ '+Number(preco).toFixed(2).replace('.', ',')+'</td>';
+					item += '<td><strong>R$ '+Number(preco_total).toFixed(2).replace('.', ',')+'<strong></td>';
 				item += '</tr>';
 			}
 		});
-			preco_total = Number(preco_total).toFixed(2).replace('.', ',');
+			preco_pedido = Number(preco_pedido).toFixed(2).replace('.', ',');
 			item += '</tbody>';
 			item += '<tfoot>';
 				item += '<tr>';
 					item += '<th></th>';
-					item += '<th class="right">TOTAL: </th>';
-					item += '<th>R$ '+preco_total+'</th>';
+					item += '<th colspan="3" class="right">TOTAL DO PEDIDO: </th>';
+					item += '<th>R$ '+preco_pedido+'</th>';
 				item += '</tr>';
 			item += '</tfoot>';
 		item += '</table>';
@@ -567,7 +584,15 @@ function filtro_produtos() {
 
 	jQuery('#enviar-pedido').click(function(){
 		nome_cliente = '<?php echo $post->post_title; ?>';
+		cpf_cliente = '<?php echo get_field('cpf__cnpj'); ?>';
 		email_cliente = '<?php echo get_field('email',$post->ID); ?>';
+		telefone_cliente = '<?php echo get_field('telefone'); ?>';
+		celular_cliente = '<?php echo get_field('celular'); ?>';
+		endereco_cliente = '<?php echo get_field('endereco').', '.get_field('numero'); ?>';
+		cep_cliente = '<?php echo get_field('cep'); ?>';
+		bairro_cliente = '<?php echo get_field('bairro'); ?>';
+		cidade_cliente = '<?php echo get_field('cidade').', '.get_field('uf'); ?>';
+
 		para = '<?php the_field('email', 'option'); ?>';
 		nome_site = '<?php the_field('titulo', 'option'); ?>';
 		produtos = JSON.stringify(produtos);
@@ -578,7 +603,7 @@ function filtro_produtos() {
 		//url = '<?php echo get_home_url(); ?>/?produtos=' + produtos;
 		//window.location.replace(url);
 
-		jQuery.getJSON("<?php echo get_template_directory_uri(); ?>/pedido.php", { nome_cliente:nome_cliente, email_cliente:email_cliente, produtos:produtos, para:para, nome_site:nome_site, preco_total:preco_total }, function(result){		
+		jQuery.getJSON("<?php echo get_template_directory_uri(); ?>/pedido.php", { nome_cliente:nome_cliente, cpf_cliente:cpf_cliente, email_cliente:email_cliente, telefone_cliente:telefone_cliente, celular_cliente:celular_cliente, endereco_cliente:endereco_cliente, cep_cliente:cep_cliente, bairro_cliente:bairro_cliente, cidade_cliente:cidade_cliente, produtos:produtos, para:para, nome_site:nome_site, preco_pedido:preco_pedido }, function(result){		
 			if(result=='ok'){
 				jQuery('.msg-pedido').html('Pedido enviado com sucesso! Obrigado.');
 
@@ -762,6 +787,18 @@ function filtro_produtos() {
 		}else{
 			jQuery('.footer').css({position: 'relative'});
 		}*/
+	});
+</script>
+
+<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/js/printThis.js"></script>
+<script type="text/javascript">
+	jQuery('.print').click(function(){
+		jQuery("#table-produtos").printThis({
+			importCSS: false,
+			importStyle: false,
+			loadCSS: ["<?php echo get_template_directory_uri(); ?>/assets/css/style.css","<?php echo get_template_directory_uri(); ?>/assets/css/style_print.css"],
+			header: '<div class="h1"><img src="<?php the_field('logo_header', 'option'); ?>" width="300" align="center"></div><h3>Categoria: '+jQuery('#table-categoria option:selected').text()+'</h3>'
+		});
 	});
 </script>
 

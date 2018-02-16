@@ -243,3 +243,21 @@
 		}
 	}
 }
+
+.normas {
+	margin-top: 20px;
+	float: left;
+	color: $cor-txt;
+
+	i {
+		color: $cor-txt;
+	}
+
+	&:hover {
+		color: $amarelo;
+
+		i {
+			color: $amarelo;
+		}
+	}
+}

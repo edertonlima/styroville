@@ -5,6 +5,7 @@
 
 	$nome = $_GET['nome_cliente'];
 	$email = $_GET['email_cliente'];
+	$tel = $_GET['tel_cliente'];
 
 	$nome_site = $_GET['nome_site'];
 	$para = $_GET['para'];
@@ -23,6 +24,7 @@
 	$conteudo_admin .= '<p>';
 		$conteudo_admin .= '<strong>Nome:</strong> '.$nome;
 		$conteudo_admin .= '<br><strong>E-mail:</strong> '.$email;
+		$conteudo_admin .= '<br><strong>Telefone:</strong> '.$tel;
 	$conteudo_admin .= '</p>';
 
 	$conteudo .= '<table width="600" id="confirmar-pedido" border="0" cellpadding="0" cellspacing="10">';

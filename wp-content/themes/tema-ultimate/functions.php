@@ -6,6 +6,21 @@ if(wp_get_current_user()->ID == 1){
 	$producao = true;
 }
 
+
+
+add_action( 'pre_get_posts', 'custom_query_vars' );
+function custom_query_vars( $query ) {
+
+	//if ( get_post_type() == 'produtos' ) {
+		$query->set( 'orderby' , 'title' );
+		$query->set( 'order' , 'ASC' );
+	//}
+
+	return $query;
+}
+
+
+
 /* HABILITAR / DESABILITAR */
 add_theme_support( 'post-thumbnails' );
 

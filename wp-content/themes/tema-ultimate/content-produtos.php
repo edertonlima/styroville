@@ -1,8 +1,9 @@
+<?php $imagem = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail' ); ?>
+<?php $imagem2 = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), '' ); ?>
+
 <div class="col-6">
 	<ul class="galeria-equipamento">
 		<li class="img-principal">
-			<?php $imagem = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail' ); ?>
-			<?php $imagem2 = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), '' ); ?>
 			<a href="<?php echo $imagem2[0]; ?>" class="fancybox" data-fancybox="galeria"><img src="<?php echo $imagem[0]; ?>"><i class="fa fa-search" aria-hidden="true"></i></a>
 		</li>
 		<?php 
@@ -87,6 +88,15 @@
 			<i class="fa fa-paper-plane" aria-hidden="true"></i>
 			Solicitar Orçamento
 		</a>
+
+		<?php 
+			$terms = wp_get_post_terms( $post->ID, $post->post_type.'_taxonomy' );
+			$field_cat = 'produtos_taxonomy_'.$terms[0]->term_id;
+
+			if(get_field('normas', $field_cat)){ ?>
+				<a href="<?php the_field('normas', $field_cat); ?>" class="fancybox normas" data-fancybox="norma"><i class="fa fa-file-text-o" aria-hidden="true"></i> Normas</a>
+			<?php }
+		?>		
 
 	</div>	
 </div>
